@@ -19,7 +19,7 @@ npm run dev
 npm run server # 另开一个终端
 ```
 
-访问[http://localhost:3001/](http://localhost:3001/)
+访问[http://localhost:8008/](http://localhost:8080/)
 
 ## Build Setup
 
