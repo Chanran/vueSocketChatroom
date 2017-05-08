@@ -6,6 +6,12 @@ import {
   Popup,
   Tab,
   TabItem,
+  Tabbar,
+  TabbarItem,
+  XButton,
+  XInput,
+  Grid,
+  GridItem,
   Group } from 'vux';
 
 export default {
@@ -20,6 +26,12 @@ export default {
     Popup,
     Tab,
     TabItem,
+    Tabbar,
+    TabbarItem,
+    XButton,
+    XInput,
+    Grid,
+    GridItem,
     Group,
   },
   data() {
@@ -35,6 +47,7 @@ export default {
       talkingTo: -1,
       talkToPeople: [],
       showMenus: false,
+      message: '',
     };
   },
   methods: {

@@ -13,7 +13,7 @@ export default {
 <style lang="less">
 @import '~vux/src/styles/reset.less';
 
-html {
+html,#app {
     height: 100%;
 }
 body {
