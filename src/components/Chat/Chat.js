@@ -62,8 +62,14 @@ export default {
     click(value) {
       for (let i = 0; i < this.people.length; i += 1) {
         if (this.people[i].value === value) {
-          this.talkToPeople.push(i);
-          console.log(this.talkToPeople);
+          if (this.talkToPeople.includes(i)) {
+            this.talkingTo = i;
+            console.log(this.talkingTo);
+          } else {
+            this.talkToPeople.push(i);
+            this.talkingTo = i;
+            console.log(this.talkToPeople);
+          }
           break;
         }
       }

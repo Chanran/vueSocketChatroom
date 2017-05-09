@@ -12,7 +12,7 @@
           群聊
         </tab-item>
       <template v-for="(personIndex, index) in talkToPeople">
-        <tab-item @on-item-click="talkToThis(personIndex)" >
+        <tab-item @on-item-click="talkToThis(personIndex)" :selected="talkingTo === personIndex ? true : false">
           {{people[personIndex].label}}
         </tab-item>
       </template>
