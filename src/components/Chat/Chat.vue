@@ -11,28 +11,30 @@
       <tab-item @on-item-click="talkToThis(-1)" selected>
           群聊
         </tab-item>
-      <template v-for="(person, index) in people">
-        <tab-item @on-item-click="talkToThis(index)" >
-          {{person.label}}
+      <template v-for="(personIndex, index) in talkToPeople">
+        <tab-item @on-item-click="talkToThis(personIndex)" >
+          {{people[personIndex].label}}
         </tab-item>
       </template>
     </tab>
 
-    {{ /* 聊天标签页聊天记录 */ }}
+    {{ /* 聊天标签页聊天记录(私聊) */ }}
+    <template v-for="(personIndex, index) in talkToPeople">
+      <div class="chat-container" v-if="talkingTo === personIndex">
+        {{people[personIndex].label}}
+      </div>
+    </template>
+
+    {{ /* 聊天标签页聊天记录(群聊) */ }}
     <div class="chat-container" v-if="talkingTo === -1">
         群聊
     </div>
-    <template v-for="(person, index) in people">
-      <div class="chat-container" v-if="talkingTo === index">
-        {{person.label}}
-      </div>
-    </template>
 
     {{ /* 选择聊天室里的人 */ }}
     <div v-transfer-dom>
       <popup v-model="showMenus">
         <div class="popup0">
-          <actionsheet v-model="showMenus" :menus="people" show-cancel></actionsheet>
+          <actionsheet @on-click-menu="click" v-model="showMenus" :menus="people" show-cancel></actionsheet>
         </div>
       </popup>
     </div>

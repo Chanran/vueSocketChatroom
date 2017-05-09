@@ -39,9 +39,11 @@ export default {
       people: [
         {
           label: 'test',
+          value: 'test',
         },
         {
           label: 'test2',
+          value: 'test2',
         },
       ],
       talkingTo: -1,
@@ -56,6 +58,15 @@ export default {
     },
     talkToThis(index) {
       this.talkingTo = index;
+    },
+    click(value) {
+      for (let i = 0; i < this.people.length; i += 1) {
+        if (this.people[i].value === value) {
+          this.talkToPeople.push(i);
+          console.log(this.talkToPeople);
+          break;
+        }
+      }
     },
   },
   beforeMount() {
