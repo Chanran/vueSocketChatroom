@@ -58,7 +58,9 @@ export default {
         this.$socket.emit('sendMsg', this.message);
         this.message = '';
       } else {
-        alert('输入不能为空');
+        this.$vux.alert.show({
+          title: '发送消息不能为空！',
+        });
       }
     },
     talkToThis(index) {

@@ -4,11 +4,13 @@ import Vue from 'vue';
 import FastClick from 'fastclick';
 import VueRouter from 'vue-router';
 import VueSocketio from 'vue-socket.io';
+import { AlertPlugin } from 'vux';
 import router from './router/index';
 import App from './App';
 
 Vue.use(VueRouter);
 Vue.use(VueSocketio, 'http://localhost:3000');
+Vue.use(AlertPlugin);
 
 FastClick.attach(document.body);
 
