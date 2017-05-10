@@ -64,11 +64,9 @@ export default {
         if (this.people[i].value === value) {
           if (this.talkToPeople.includes(i)) {
             this.talkingTo = i;
-            console.log(this.talkingTo);
           } else {
             this.talkToPeople.push(i);
             this.talkingTo = i;
-            console.log(this.talkToPeople);
           }
           break;
         }

@@ -16,7 +16,7 @@ function findInUsers(sessionId) {
   let index = -1;
   let usersNum = users.length;
   for (let i = 0; i < usersNum; i += 1) {
-    if (users[i].session_id === sessionId) {
+    if (users[i].sessionId === sessionId) {
       index = i;
     }
   }

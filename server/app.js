@@ -4,18 +4,24 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const fs = require('fs');
+
 
 const socketHandler = require('./middlewares/socketHandler');
 const chat = require('./routes/chat');
 
 const app = express();
+const secret = fs.readFileSync(path.resolve(__dirname, 'config/secret.key'), 'utf8');
 
 // 启用session
 app.use(session({
-  secret: 'keyboard cat',
+  name: 'session',
+  keys: [secret],
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true },
+  cookie: {
+    secure: true,
+  },
 }));
 
 // uncomment after placing your favicon in /public
