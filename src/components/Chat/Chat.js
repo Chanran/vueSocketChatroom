@@ -54,7 +54,12 @@ export default {
   },
   methods: {
     sendMsg() {
-      this.$socket.emit('sendMsg', 'test');
+      if (this.message.trim() !== '') {
+        this.$socket.emit('sendMsg', this.message);
+        this.message = '';
+      } else {
+        alert('输入不能为空');
+      }
     },
     talkToThis(index) {
       this.talkingTo = index;
@@ -74,8 +79,7 @@ export default {
     },
   },
   beforeMount() {
-    this.$options.sockets.private = (data) => {
-      console.log(data);
+    this.$options.sockets.private = function () {
       console.log('test');
     };
   },

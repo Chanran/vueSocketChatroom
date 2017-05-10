@@ -46,7 +46,7 @@
     <div class="replace-block"></div>
     {{ /* 置底输入框 */ }}
     <div class="bottom-input">
-      <input class="input" :value="message" placeholder="输入..." />
+      <input class="input" v-model="message" placeholder="输入..." />
       <x-button class="button" type="primary" @click.native="sendMsg">发送</x-button>
     </div>
   </div>
