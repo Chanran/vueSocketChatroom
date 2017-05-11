@@ -1,21 +1,15 @@
 <template>
+  <div class="login-container">
 
-<div>
-  <header id="banner">
-    <h1>Socket Chat</h1>
-  </header>
-  <section id="chatroom">
-      <div id="login">
-          <form method="post" action="/chat/login" enctype="application/x-www-form-urlencoded">
-              <input name="name" type="text" placeholder="输入名字" required/>
-              <input type="submit" value="登录"/>
-          </form>
-      </div>
-  </section>
-  <footer>
-      Hope you enjoy your stay here
-  </footer>
-</div>
+    <div class="main">
+      <group label-width="4.5em" label-margin-right="2em" label-align="right">
+        <x-input v-model="username" title="用户名" placeholder="请输入用户名"></x-input>
+        <x-input v-model="password" title="密码" type="password" placeholder="请输入密码"></x-input>
+        <x-button type="primary" text="登录"></x-button>
+      </group>
+    </div>
+
+  </div>
 
 </template>
 
