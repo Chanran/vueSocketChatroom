@@ -15,7 +15,17 @@ export default {
   data() {
     return {
       username: '',
-      password: '',
     };
+  },
+  methods: {
+    login() {
+      if (this.username.trim() !== '') {
+        console.log(this.username);
+      } else {
+        this.$vux.alert.show({
+          title: '用户名不能为空',
+        });
+      }
+    },
   },
 };
