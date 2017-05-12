@@ -20,6 +20,7 @@ export default {
   methods: {
     login() {
       if (this.username.trim() !== '') {
+        console.log(this.$http('/api/login'));
         console.log(this.username);
       } else {
         this.$vux.alert.show({

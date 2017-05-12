@@ -28,10 +28,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/socket.io/socket.io.js': {
-      //   target: 'http://localhost:3000/socket.io/socket.io.js',
-      //   secure: false
-      // }
+      '/api/*': {
+        target: 'http://localhost:3000',
+        secure: false
+      }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

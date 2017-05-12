@@ -16,7 +16,7 @@ const secret = fs.readFileSync(path.resolve(__dirname, 'config/secret.key'), 'ut
 // 启用session
 app.use(session({
   name: 'session',
-  keys: [secret],
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -32,7 +32,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', chat);
+// 路由
+app.use('/api', chat);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
