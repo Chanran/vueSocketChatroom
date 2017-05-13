@@ -19,9 +19,14 @@ export default {
   },
   methods: {
     login() {
+      let username = this.username;
+
       if (this.username.trim() !== '') {
-        console.log(this.$http('/api/login'));
-        console.log(this.username);
+        this.$http.get('/api/login', {
+          params: {
+            username,
+          },
+        });
       } else {
         this.$vux.alert.show({
           title: '用户名不能为空',

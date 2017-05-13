@@ -13,15 +13,15 @@ const chat = require('./routes/chat');
 const app = express();
 const secret = fs.readFileSync(path.resolve(__dirname, 'config/secret.key'), 'utf8');
 
+// 禁用x-powered-by头
+app.disable('x-powered-by');
+
 // 启用session
 app.use(session({
   name: 'session',
   secret,
   resave: false,
   saveUninitialized: true,
-  cookie: {
-    secure: true,
-  },
 }));
 
 // uncomment after placing your favicon in /public
