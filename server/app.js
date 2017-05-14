@@ -18,18 +18,22 @@ app.disable('x-powered-by');
 
 // 启用session
 app.use(session({
-  name: 'session',
+  name: 'blue',
   secret,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24,
+  },
 }));
+// 解析客户端传来的cookie
+app.use(cookieParser(secret));
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 路由
