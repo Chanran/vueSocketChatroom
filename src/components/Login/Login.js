@@ -20,7 +20,6 @@ export default {
   methods: {
     login() {
       let username = this.username;
-
       if (this.username.trim() !== '') {
         this.$http.get('/api/login', {
           params: {
