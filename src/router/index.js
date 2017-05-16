@@ -25,10 +25,12 @@ export default new Router({
             next();
           } else {
             console.log(data);
+            next('/login');
           }
         })
         .catch((err) => {
           console.log(err);
+          next('/login');
         });
       },
     },

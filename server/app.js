@@ -4,6 +4,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const fs = require('fs');
 
 
@@ -25,6 +26,9 @@ app.use(session({
   cookie: {
     maxAge: 1000 * 60 * 60 * 24,
   },
+  store: new MongoStore({
+    url: 'mongodb://localhost/test',
+  }),
 }));
 // 解析客户端传来的cookie
 app.use(cookieParser(secret));

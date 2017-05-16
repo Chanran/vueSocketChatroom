@@ -80,9 +80,4 @@ export default {
       }
     },
   },
-  beforeMount() {
-    this.$options.sockets.private = function () {
-      console.log('test');
-    };
-  },
 };
