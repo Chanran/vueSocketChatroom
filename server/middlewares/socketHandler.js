@@ -1,5 +1,13 @@
 let io = require('socket.io');
 const http = require('http');
+const mongodbClient = require('mongodb').MongoClient;
+const dbUrl = require('../config/db').url;
+
+mongodbClient.connect(dbUrl, (err, db) => {
+  let data = db.collection('users').insertOne({ test: 1 });
+  console.log(data);
+});
+
 
 /*
  * 内部数据结构：用户列表
