@@ -12,15 +12,6 @@ npm i -g nodemon
 
     给你的编辑器装一个eslint插件
 
-## 启动
-
-```
-npm run dev
-npm run server # 另开一个终端
-```
-
-访问[http://localhost:8008/](http://localhost:8080/)
-
 ## Build Setup
 
 ``` bash
@@ -45,6 +36,14 @@ npm test
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
+## 启动
+
+```
+npm run dev
+npm run server # 另开一个终端
+```
+
+访问[http://localhost:8008/](http://localhost:8080/)
 
 ## License
 
