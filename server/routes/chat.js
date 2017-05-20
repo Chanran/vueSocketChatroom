@@ -38,6 +38,21 @@ router.get('/login', (req, res) => {
   }
 });
 
+router.get('/logout', (req, res) => {
+  if (req.session.username) {
+    req.session.username = null;
+    res.json({
+      code: '200',
+      msg: 'log out successfully',
+    });
+  } else {
+    res.json({
+      code: '203',
+      msg: 'log out error,you are not logged in',
+    });
+  }
+});
+
 router.get('/testLogin', (req, res) => {
   if (req.session.username) {
     res.json({

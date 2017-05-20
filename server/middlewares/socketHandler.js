@@ -4,8 +4,9 @@ const mongodbClient = require('mongodb').MongoClient;
 const dbUrl = require('../config/db').url;
 
 mongodbClient.connect(dbUrl, (err, db) => {
-  let data = db.collection('users').insertOne({ test: 1 });
-  console.log(data);
+  db.collection('users').find({}).toArray((err, docs) => {
+    console.log(docs);
+  });
 });
 
 

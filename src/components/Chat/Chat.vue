@@ -2,8 +2,9 @@
   <div class="container">
 
     {{ /* 头部内容 */ }}
-    <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">
+    <x-header :left-options="{showBack: false}" :right-options="{showMore: true}" @on-click-more="showMenus = true">
       {{ talkingTo === -1 ? '群聊' : people[talkingTo].label}}
+      <a slot="left" @click="logout">退出登录</a>
     </x-header>
 
     {{ /* 聊天标签页切换 */ }}
@@ -34,7 +35,7 @@
     <div v-transfer-dom>
       <popup v-model="showMenus">
         <div class="popup0">
-          <actionsheet @on-click-menu="click" v-model="showMenus" :menus="people" show-cancel></actionsheet>
+          <actionsheet @on-click-menu="choosePerson" v-model="showMenus" :menus="people" show-cancel></actionsheet>
         </div>
       </popup>
     </div>

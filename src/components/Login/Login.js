@@ -4,6 +4,8 @@ import {
   Cell,
   Group } from 'vux';
 
+import { login } from '../../api/api';
+
 export default {
   name: 'Login',
   components: {
@@ -19,27 +21,9 @@ export default {
   },
   methods: {
     login() {
-      let that = this;
       let username = this.username;
       if (this.username.trim() !== '') {
-        this.$http.get('/api/login', {
-          params: {
-            username,
-          },
-        })
-        .then(({ data }) => {
-          console.log(data);
-          if (parseInt(data.code, 10) === 200) {
-            that.$router.push('/chat');
-          } else {
-            that.$vux.alert.show({
-              title: data.msg,
-            });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        login(this, username);
       } else {
         this.$vux.alert.show({
           title: '用户名不能为空',

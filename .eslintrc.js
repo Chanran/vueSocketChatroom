@@ -42,5 +42,6 @@ module.exports = {
     'no-param-reassign': 0,
     'prefer-const': 0,
     'no-console':0,
+    'no-unused-expressions': [2, { allowTernary: true }]
   }
 }

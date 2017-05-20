@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import axios from 'axios';
 import Chat from '@/components/Chat/';
 import Login from '@/components/Login/';
 import NotFound from '@/components/NotFound/';
+
+import { checkLogin } from '../api/api';
 
 Vue.use(Router);
 
@@ -18,26 +19,16 @@ export default new Router({
       name: 'Chat',
       component: Chat,
       beforeEnter: (to, from, next) => {
-        axios.get('/api/testLogin')
-        .then(({ data }) => {
-          if (parseInt(data.code, 10) === 200) {
-            console.log(data);
-            next();
-          } else {
-            console.log(data);
-            next('/login');
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          next('/login');
-        });
+        checkLogin(to, from, next, '', '/login');
       },
     },
     {
       path: '/login',
       name: 'Login',
       component: Login,
+      beforeEnter: (to, from, next) => {
+        checkLogin(to, from, next, '/chat', '');
+      },
     },
     {
       path: '*',

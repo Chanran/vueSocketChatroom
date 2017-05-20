@@ -14,6 +14,8 @@ import {
   GridItem,
   Group } from 'vux';
 
+import { logout } from '../../api/api';
+
 export default {
   name: 'Chat',
   directives: {
@@ -66,7 +68,7 @@ export default {
     talkToThis(index) {
       this.talkingTo = index;
     },
-    click(value) {
+    choosePerson(value) {
       for (let i = 0; i < this.people.length; i += 1) {
         if (this.people[i].value === value) {
           if (this.talkToPeople.includes(i)) {
@@ -78,6 +80,15 @@ export default {
           break;
         }
       }
+    },
+    logout() {
+      const that = this;
+      this.$vux.confirm.show({
+        title: '确定要退出聊天室吗？',
+        onConfirm() {
+          logout(that);
+        },
+      });
     },
   },
 };

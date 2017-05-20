@@ -4,14 +4,14 @@ import Vue from 'vue';
 import FastClick from 'fastclick';
 import VueRouter from 'vue-router';
 import VueSocketio from 'vue-socket.io';
-import { AlertPlugin, AjaxPlugin } from 'vux';
+import { AlertPlugin, ConfirmPlugin } from 'vux';
 import router from './router/index';
 import App from './App';
 
 Vue.use(VueSocketio, 'http://localhost:3000'); // 代理http://localhost:3000的socket
 Vue.use(VueRouter); // 使用vue-router
 Vue.use(AlertPlugin); // 使用alert插件
-Vue.use(AjaxPlugin); // 使用ajax插件
+Vue.use(ConfirmPlugin);
 
 FastClick.attach(document.body);
 
