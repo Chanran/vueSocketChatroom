@@ -1,14 +1,25 @@
 let io = require('socket.io');
 const http = require('http');
-const mongodbClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
 const dbUrl = require('../config/db').url;
 
-mongodbClient.connect(dbUrl, (err, db) => {
-  db.collection('users').find({}).toArray((err, docs) => {
-    console.log(docs);
-  });
+// 连接mongodb
+mongoose.Promise = global.Promise;
+mongoose.connect(dbUrl);
+const socketUser = new mongoose.Schema({
+  username: String,
+  sessionId: String,
+  socket: Object,
 });
+const UserModel = mongoose.model('users', socketUser);
 
+let test = new UserModel();
+test.username = 'username';
+test.sessionId = 'sessionId';
+test.socket = { test: 1 };
+test.save((err) => {
+  console.log(err);
+});
 
 /*
  * 内部数据结构：用户列表

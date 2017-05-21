@@ -2,17 +2,20 @@
 
 ## 安装依赖
 
-1. 刷新node服务器
+1. node7.x
+
+2. 刷新node服务器
 
 ```
 npm i -g nodemon
 ```
 
-2. eslint代码规范化
+3. eslint代码规范化
 
     给你的编辑器装一个eslint插件
 
-## Build Setup
+
+## 下载
 
 ``` bash
 # clone
@@ -24,6 +27,11 @@ npm install
 ```
 
 ## 启动
+
+建表(初始化项目的时候运行一次就行)
+```
+npm run db
+```
 
 ```
 npm run dev

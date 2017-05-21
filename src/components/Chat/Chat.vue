@@ -2,9 +2,8 @@
   <div class="container">
 
     {{ /* 头部内容 */ }}
-    <x-header :left-options="{showBack: false}" :right-options="{showMore: true}" @on-click-more="showMenus = true">
+    <x-header :left-options="{showBack: true, preventGoBack: true, backText: '退出登录'}" :right-options="{showMore: true}" @on-click-back="logout" @on-click-more="showMenus = true">
       {{ talkingTo === -1 ? '群聊' : people[talkingTo].label}}
-      <a slot="left" @click="logout">退出登录</a>
     </x-header>
 
     {{ /* 聊天标签页切换 */ }}
