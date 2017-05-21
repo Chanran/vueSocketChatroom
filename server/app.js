@@ -7,6 +7,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const fs = require('fs');
 
+const dbUrl = require('./config/db').url;
 
 const socketHandler = require('./middlewares/socketHandler');
 const chat = require('./routes/chat');
@@ -27,7 +28,7 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24,
   },
   store: new MongoStore({
-    url: 'mongodb://localhost/test',
+    url: dbUrl,
   }),
 }));
 // 解析客户端传来的cookie

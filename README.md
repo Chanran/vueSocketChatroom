@@ -15,26 +15,13 @@ npm i -g nodemon
 ## Build Setup
 
 ``` bash
+# clone
+git clone git@github.com:Chanran/vueSocketChatroom.git
+cd vueSocketChatroom
+
 # install dependencies
 npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## 启动
 
@@ -43,7 +30,16 @@ npm run dev
 npm run server # 另开一个终端
 ```
 
-访问[http://localhost:8008/](http://localhost:8080/)
+访问[http://localhost:8080/](http://localhost:8080/)
+
+## 技术文档
+
+- [vue2(前端MVVM框架)](https://cn.vuejs.org/)
+- [vue-router2(前端路由框架)](https://router.vuejs.org/zh-cn/)
+- [vue-loader(webpack的loader,vue-cli使用的)](https://lvyongbo.gitbooks.io/vue-loader/content/)
+- [vux(前端UI框架)](https://vux.li/#/)
+- [express4.x(node框架)](http://www.expressjs.com.cn/)
+- [mongodb(数据库)](http://mongodb.github.io/node-mongodb-native/2.2/installation-guide/installation-guide/)
 
 ## License
 
