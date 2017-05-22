@@ -39,14 +39,14 @@ app.use(cookieParser(secret));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/static', express.static(path.join(__dirname, '../dist/static')));
+// app.use('/static', express.static(path.join(__dirname, '../dist/static')));
 
 // 路由
 app.use('/api', chat);
 // 上线路由
-app.get('/dist', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../dist/index.html'));
-});
+// app.get('/dist', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../dist/index.html'));
+// });
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -1,7 +1,16 @@
 const express = require('express');
-// const crypto = require('crypto');
+const socketHandler = require('../middlewares/socketHandler');
 
 const router = express.Router();
+
+router.get('/', function* () {
+  let sessionId = this.cookies.get('blue');
+  let name = this.session.username;
+  console.log('session_id', sessionId, 'name', name);
+  if (sessionId && name) {
+    yield socketHandler.addUser(name, sessionId);
+  }
+});
 
 /* GET home page. */
 router.get('/login', (req, res) => {
