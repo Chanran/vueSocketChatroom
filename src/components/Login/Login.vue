@@ -7,9 +7,7 @@
         <x-button type="primary" text="登录" @click.native="login"></x-button>
       </group>
     </div>
-
   </div>
-
 </template>
 
 <script>

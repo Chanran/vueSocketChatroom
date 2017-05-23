@@ -20,7 +20,6 @@ app.disable('x-powered-by');
 
 // 启用session
 app.use(session({
-  name: 'blue',
   secret,
   resave: false,
   saveUninitialized: false,

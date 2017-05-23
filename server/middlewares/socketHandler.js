@@ -2,80 +2,6 @@ let io = require('socket.io');
 const http = require('http');
 const users = require('../models/users');
 
-// /**
-//  * 查找用户
-//  * @param {string} sessionId
-//  * @returns {number} index
-//  */
-// function findInUsers(sessionId) {
-//   let index = -1;
-//   let usersNum = users.getUsersLength();
-//   for (let i = 0; i < usersNum; i += 1) {
-//     if (users[i].sessionId === sessionId) {
-//       index = i;
-//     }
-//   }
-//   return index;
-// }
-
-// /**
-//  * 增加用户
-//  * @param {string} name
-//  * @param {string} sessionId
-//  */
-// function addUser(name, sessionId) {
-//   let index = findInUsers(sessionId);
-//   if (index === -1) {
-//     users.push({
-//       name,
-//       sessionId,
-//       socket: null,
-//     });
-//   } else if (users[index].name !== name) {
-//     users[index].name = name;
-//   }
-// }
-
-// /**
-//  * 设置用户的socket连接
-//  * @param {string} sessionId
-//  * @param {object} socket
-//  */
-// function setUserSocket(sessionId, socket) {
-//   let index = findInUsers(sessionId);
-
-//   if (index !== -1) {
-//     users[index].socket = socket;
-//   }
-// }
-
-// /**
-//  * 查找用户，返回用户信息
-//  * @param {string} sessionId
-//  * @returns {object} userObject
-//  */
-// function findUser(sessionId) {
-//   let index = findInUsers(sessionId);
-
-//   let userObject = index > -1 ? users[index] : null;
-
-//   return userObject;
-// }
-
-// /**
-//  * 返回其他用户信息
-//  * @param {any} sessionId
-//  * @returns {array} others
-//  */
-// function otherUsers(sessionId) {
-//   let others = users.filter((user) => {
-//     let isThisUser = user.sessionId !== sessionId ? 1 : 0;
-//     return !!isThisUser;
-//   });
-
-//   return others;
-// }
-
 function getSessionId(cookieString, cookieName) {
   console.log(cookieString);
   let matches = new RegExp(`${cookieName}=([^;]+);`, 'gmi').exec(cookieString);
@@ -118,7 +44,7 @@ function messageHandler(socketio) {
     });
 
     socket.on('disconnect', () => {
-      console.log(this.id, '断开连接');
+      console.log(socket.id, '断开连接');
     });
   });
 }
