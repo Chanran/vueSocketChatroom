@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const host = 'http://localhost:3000';
+
 /**
  * 检查登录状态
  *
@@ -11,7 +13,7 @@ import axios from 'axios';
  * @param {string} [ErrorNextRoute=''] 异步请求客户端错误跳转链接
  */
 export function checkLogin(to, from, next, loginNextRoute = '', logoutNextRoute = '', ErrorNextRoute = '') {
-  axios.get('/api/testLogin')
+  axios.get(`${host}/api/testLogin`)
     .then(({ data }) => {
       console.log(data);
       if (parseInt(data.code, 10) === 200) {
@@ -26,8 +28,15 @@ export function checkLogin(to, from, next, loginNextRoute = '', logoutNextRoute 
     });
 }
 
+/**
+ * 登录
+ *
+ * @export function
+ * @param {object} vueInstance vuejs的实例
+ * @param {string} username 用户名
+ */
 export function login(vueInstance, username) {
-  axios.get('/api/login', {
+  axios.get(`${host}/api/login`, {
     params: {
       username,
     },
@@ -47,8 +56,14 @@ export function login(vueInstance, username) {
   });
 }
 
+/**
+ * 退出登录
+ *
+ * @export function
+ * @param {object} vueInstance vuejs的实例
+ */
 export function logout(vueInstance) {
-  axios.get('/api/logout')
+  axios.get(`${host}/api/logout`)
   .then(({ data }) => {
     console.log(data);
     if (parseInt(data.code, 10) === 200) {
@@ -68,6 +83,11 @@ export function logout(vueInstance) {
   });
 }
 
+/**
+ * 取得在线人的列表
+ *
+ * @export function
+ */
 export function getAllPeople() {
-  axios.get('/api/getAllPeople');
+  axios.get(`${host}/api/getAllPeople`);
 }

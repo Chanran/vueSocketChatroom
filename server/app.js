@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const fs = require('fs');
+// const proxy = require('proxy-middleware');
 
 const dbUrl = require('./config/db').url;
 
@@ -38,7 +39,17 @@ app.use(cookieParser(secret));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use('/static', express.static(path.join(__dirname, '../dist/static')));
+app.use('/static', express.static(path.join(__dirname, '../dist/static')));
+
+// 允许跨域访问
+app.all('*', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length, Authorization, Accept,X-Requested-With');
+  res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
+  res.header('X-Powered-By', ' 3.2.1');
+  if (req.method === 'OPTIONS') res.send(200);/* 让options请求快速返回*/
+  else next();
+});
 
 // 路由
 app.use('/api', chat);
