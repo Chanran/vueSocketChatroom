@@ -31,6 +31,11 @@ module.exports = {
       '/api/*': {
         target: 'http://localhost:3000',
         secure: false
+      },
+      '/socket.io': {
+        target: 'http://localhost:3000',
+        ws: true,
+        secure: false
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

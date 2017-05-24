@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const host = 'http://localhost:3000';
-
 /**
  * 检查登录状态
  *
@@ -13,7 +11,7 @@ const host = 'http://localhost:3000';
  * @param {string} [ErrorNextRoute=''] 异步请求客户端错误跳转链接
  */
 export function checkLogin(to, from, next, loginNextRoute = '', logoutNextRoute = '', ErrorNextRoute = '') {
-  axios.get(`${host}/api/testLogin`)
+  axios.get('/api/testLogin')
     .then(({ data }) => {
       console.log(data);
       if (parseInt(data.code, 10) === 200) {
@@ -36,7 +34,7 @@ export function checkLogin(to, from, next, loginNextRoute = '', logoutNextRoute 
  * @param {string} username 用户名
  */
 export function login(vueInstance, username) {
-  axios.get(`${host}/api/login`, {
+  axios.get('api/login', {
     params: {
       username,
     },
@@ -63,7 +61,7 @@ export function login(vueInstance, username) {
  * @param {object} vueInstance vuejs的实例
  */
 export function logout(vueInstance) {
-  axios.get(`${host}/api/logout`)
+  axios.get('/api/logout')
   .then(({ data }) => {
     console.log(data);
     if (parseInt(data.code, 10) === 200) {
@@ -89,5 +87,5 @@ export function logout(vueInstance) {
  * @export function
  */
 export function getAllPeople() {
-  axios.get(`${host}/api/getAllPeople`);
+  axios.get('/api/getAllPeople');
 }
