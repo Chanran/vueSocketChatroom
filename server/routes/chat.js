@@ -35,7 +35,9 @@ router.get('/login', (req, res) => {
 
 router.get('/logout', (req, res) => {
   if (req.session.username) {
-    req.session.username = null;
+    req.session.destroy((err) => {
+      console.log(err);
+    });
     res.json({
       code: '200',
       msg: 'log out successfully',

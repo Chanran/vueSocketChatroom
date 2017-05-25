@@ -3,28 +3,24 @@ const http = require('http');
 const users = require('../models/users');
 
 function getSessionId(cookieString, cookieName) {
-  console.log(cookieString);
+  // console.log(cookieString);
   let matches = new RegExp(`${cookieName}=([^;]+);`, 'gmi').exec(cookieString);
-  console.log(matches);
+  // console.log(matches);
   return matches[1] ? matches[1] : null;
 }
 
 function messageHandler(socketio) {
   socketio.on('connection', (socket) => {
     console.log(socket.id, '已连接');
-    // let sessionId = getSessionId(socket.request.headers.cookie, 'ioUser');
-    // console.log(sessionId);
     let sessionId = null;
-    if (sessionId) {
-      users.setUserSocket(sessionId, socket);
-    }
 
     socket.on('login', (data) => {
-
+      sessionId = getSessionId(socket.request.headers.cookie, 'ioUser');
     });
 
     // 广播
     socket.on('broadcast', (data) => {
+      sessionId = getSessionId(socket.request.headers.cookie, 'ioUser');
       let from = users.findUser(sessionId);
       if (from) {
         socket.broadcast.emit('broadcast', {
@@ -36,6 +32,7 @@ function messageHandler(socketio) {
 
     // 私聊
     socket.on('private', (data) => {
+      sessionId = getSessionId(socket.request.headers.cookie, 'ioUser');
       let from = users.findUser(sessionId);
       if (from) {
         let to = users.findUser(data.toSessionId);
