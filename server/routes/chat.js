@@ -1,24 +1,19 @@
 const express = require('express');
-const socketHandler = require('../middlewares/socketHandler');
+// const socketHandler = require('../middlewares/socketHandler');
 
 const router = express.Router();
 
 /* GET home page. */
 router.get('/login', (req, res) => {
   let username = req.query.username || req.params.username;
-  let ip = req.connection.remoteAddress;
-  let port = req.connection.remotePort;
+  // let ip = req.connection.remoteAddress;
+  // let port = req.connection.remotePort;
   let sessionId = req.session.id;
 
   if (username) {
     req.session.username = username;
     res.cookie('ioUser',
-      {
-        username,
-        ip,
-        port,
-        sessionId,
-      },
+      sessionId,
       {
         signed: true,
         secure: false,
@@ -55,6 +50,8 @@ router.get('/logout', (req, res) => {
 
 router.get('/testLogin', (req, res) => {
   console.log(req.cookies);
+  console.log(req.signedCookies);
+  console.log(req.session);
   if (req.session.username) {
     res.json({
       msg: 'logged in',

@@ -12,11 +12,16 @@ function getSessionId(cookieString, cookieName) {
 function messageHandler(socketio) {
   socketio.on('connection', (socket) => {
     console.log(socket.id, '已连接');
-    // let sessionId = getSessionId(socket.request.headers.cookie, 'io');
+    // let sessionId = getSessionId(socket.request.headers.cookie, 'ioUser');
+    // console.log(sessionId);
     let sessionId = null;
     if (sessionId) {
       users.setUserSocket(sessionId, socket);
     }
+
+    socket.on('login', (data) => {
+
+    });
 
     // 广播
     socket.on('broadcast', (data) => {
