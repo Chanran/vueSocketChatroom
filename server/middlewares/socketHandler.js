@@ -1,6 +1,12 @@
 let io = require('socket.io');
 const http = require('http');
+const fs = require('fs');
+const path = require('path');
 const users = require('../models/users');
+const cookieParser = require('cookie-parser');
+const urlencode = require('urlencode');
+
+const secret = fs.readFileSync(path.resolve(__dirname, '../config/secret.key'), 'utf8');
 
 function getSessionId(cookieString, cookieName) {
   // console.log(cookieString);
@@ -12,10 +18,12 @@ function getSessionId(cookieString, cookieName) {
 function messageHandler(socketio) {
   socketio.on('connection', (socket) => {
     console.log(socket.id, '已连接');
+    let cookies = socket.request.headers.cookie;
     let sessionId = null;
 
     socket.on('login', () => {
-      sessionId = getSessionId(socket.request.headers.cookie, 'ioUser');
+      let unsignedCookie = urlencode.decode(getSessionId(cookies, 'ioUser'));
+      sessionId = cookieParser.signedCookie(unsignedCookie, secret);
       users.setUserSocket(sessionId, socket);
     });
 

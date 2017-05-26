@@ -1,142 +1,52 @@
-const mongoose = require('mongoose');
-const bluebird = require('bluebird');
-const dbUrl = require('../config/db').url;
-
-// 连接mongodb
-mongoose.Promise = bluebird;
-mongoose.connect(dbUrl);
-const db = mongoose.connection;
-
-db.on('error', (err) => {
-  console.log(err);
-});
-
 /*
  * 内部数据结构：用户列表
- *  {username, sessionId, socket}
+ *  [{name, sessionId, socket} ...]
  * */
-const socketUser = new mongoose.Schema({
-  username: String,
-  sessionId: String,
-  socket: Object,
-});
-const UserModel = mongoose.model('users', socketUser);
+let users = [];
 
-/**
- * 返回在线人数
- *
- * @returns number
- */
-function getUsersLength() {
-  return new Promise((resolve, reject) => {
-    UserModel.count({
-      $not: [{ username: null }],
-    }, (err, docs) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(docs);
-      }
-    });
-  });
+function findInUsers(sessionId) { // 通过sessionId查找
+  let index = -1;
+  for (let j = 0, len = users.length; j < len; j += 1) {
+    if (users[j].sessionId === sessionId) { index = j; }
+  }
+  return index;
 }
-
-/**
- * 全部用户信息
- *
- * @returns array
- */
-function getUsers() {
-  return new Promise((resolve, reject) => {
-    UserModel.find({
-      $not: [{ username: null }],
-    })
-    .toArray((err, docs) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(docs);
-      }
-    });
-  });
-}
-
-/**
- * 根据sessionId找到用户
- *
- * @param {string} sessionId
- * @returns object
- */
-function findUser(sessionId) {
-  return new Promise((resolve, reject) => {
-    UserModel.find({
-      $not: [{ username: null }],
+function addUser(name, sessionId) { // 添加用户
+  let index = findInUsers(sessionId);
+  if (index === -1) {
+    users.push({
+      name,
       sessionId,
-    }, (err, docs) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(docs);
-      }
+      socket: null,
     });
-  });
+  } else if (users[index].name !== name) {
+    users[index].name = name;
+  }
 }
-
-/**
- * 获取其他人信息
- *
- * @param {string} sessionId
- * @returns array
- */
-function otherUsers(sessionId) {
-  return new Promise((resolve, reject) => {
-    UserModel.find({
-      $not: [{ sessionId }],
-    })
-    .toArray((err, docs) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(docs);
-      }
-    });
-  });
+function setUserSocket(sessionId, socket) { // 更新用户socket
+  let index = findInUsers(sessionId);
+  if (index !== -1) {
+    users[index].socket = socket;
+  }
 }
-
-function addUser(username, sessionId) {
-  // if (findUser(sessionId)) {
-  //   return false;
-  // }
-  console.log(findUser(sessionId));
-
-  let users = new UserModel({
-    username,
-    sessionId,
-    socket: null,
-  });
-
-  users.save((err) => {
-    if (err) {
-      console.log(err);
+function findUser(sessionId) { // 查找
+  let index = findInUsers(sessionId);
+  return index > -1 ? users[index] : null;
+}
+function otherUsers(sessionId) { // 其他人
+  let results = [];
+  for (let j = 0, len = users.length; j < len; j += 1) {
+    if (users[j].sessionId !== sessionId) {
+      results.push({
+        sessionId: users[j].sessionId,
+        name: users[j].name,
+      });
     }
-  });
-}
-
-function setUserSocket(sessionId, socket) {
-  UserModel.updateOne({
-    sessionId,
-  }, {
-    $set: {
-      socket,
-    },
-  }, (err) => {
-    console.log(err);
-  });
+  }
+  return results;
 }
 
 module.exports = {
-  getUsersLength,
-  getUsers,
   findUser,
   otherUsers,
   addUser,
