@@ -54,13 +54,8 @@ export default {
       message: '',
     };
   },
-  sockets: {
-    connect() {
-      console.log('socket connected');
-    },
-    customEmitfunc() {
-      console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)');
-    },
+  mounted() {
+    this.$socket.emit('login');
   },
   methods: {
     sendMsg() {

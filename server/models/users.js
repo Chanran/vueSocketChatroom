@@ -103,16 +103,22 @@ function otherUsers(sessionId) {
   });
 }
 
-function* addUser(username, sessionId) {
-  if (yield findUser(sessionId)) {
-    return false;
-  }
-  return UserModel.insertOne({
+function addUser(username, sessionId) {
+  // if (findUser(sessionId)) {
+  //   return false;
+  // }
+  console.log(findUser(sessionId));
+
+  let users = new UserModel({
     username,
     sessionId,
     socket: null,
-  }, (err) => {
-    console.log(err);
+  });
+
+  users.save((err) => {
+    if (err) {
+      console.log(err);
+    }
   });
 }
 

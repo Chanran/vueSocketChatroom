@@ -1,5 +1,5 @@
 const express = require('express');
-// const socketHandler = require('../middlewares/socketHandler');
+const users = require('../models/users');
 
 const router = express.Router();
 
@@ -12,6 +12,7 @@ router.get('/login', (req, res) => {
 
   if (username) {
     req.session.username = username;
+    console.log(users.addUser(username, sessionId));
     res.cookie('ioUser',
       sessionId,
       {
@@ -36,7 +37,9 @@ router.get('/login', (req, res) => {
 router.get('/logout', (req, res) => {
   if (req.session.username) {
     req.session.destroy((err) => {
-      console.log(err);
+      if (err) {
+        console.log(err);
+      }
     });
     res.json({
       code: '200',
@@ -51,9 +54,9 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/testLogin', (req, res) => {
-  console.log(req.cookies);
-  console.log(req.signedCookies);
-  console.log(req.session);
+  // console.log(req.cookies);
+  // console.log(req.signedCookies);
+  // console.log(req.session);
   if (req.session.username) {
     res.json({
       msg: 'logged in',

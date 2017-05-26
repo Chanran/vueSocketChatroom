@@ -14,13 +14,13 @@ function messageHandler(socketio) {
     console.log(socket.id, '已连接');
     let sessionId = null;
 
-    socket.on('login', (data) => {
+    socket.on('login', () => {
       sessionId = getSessionId(socket.request.headers.cookie, 'ioUser');
+      users.setUserSocket(sessionId, socket);
     });
 
     // 广播
     socket.on('broadcast', (data) => {
-      sessionId = getSessionId(socket.request.headers.cookie, 'ioUser');
       let from = users.findUser(sessionId);
       if (from) {
         socket.broadcast.emit('broadcast', {
@@ -32,7 +32,6 @@ function messageHandler(socketio) {
 
     // 私聊
     socket.on('private', (data) => {
-      sessionId = getSessionId(socket.request.headers.cookie, 'ioUser');
       let from = users.findUser(sessionId);
       if (from) {
         let to = users.findUser(data.toSessionId);
