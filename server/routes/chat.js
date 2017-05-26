@@ -54,6 +54,23 @@ router.get('/logout', (req, res) => {
   }
 });
 
+router.get('/others', (req, res) => {
+  const sessionId = req.session.id;
+  const username = req.session.username;
+  if (sessionId && username) {
+    res.json({
+      msg: 'success',
+      code: '200',
+      others: users.otherUsers(sessionId),
+    });
+  } else {
+    res.json({
+      msg: 'sessionId and username are not null',
+      code: '203',
+    });
+  }
+});
+
 router.get('/testLogin', (req, res) => {
   // console.log(req.cookies);
   // console.log(req.signedCookies);

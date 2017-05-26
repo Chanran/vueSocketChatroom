@@ -12,6 +12,7 @@ function findInUsers(sessionId) { // 通过sessionId查找
   return index;
 }
 function addUser(name, sessionId) { // 添加用户
+  console.log(users);
   let index = findInUsers(sessionId);
   if (index === -1) {
     users.push({
@@ -34,6 +35,7 @@ function findUser(sessionId) { // 查找
   return index > -1 ? users[index] : null;
 }
 function otherUsers(sessionId) { // 其他人
+  console.log(users);
   let results = [];
   for (let j = 0, len = users.length; j < len; j += 1) {
     if (users[j].sessionId !== sessionId) {

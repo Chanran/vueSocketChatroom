@@ -86,6 +86,16 @@ export function logout(vueInstance) {
  *
  * @export function
  */
-export function getAllPeople() {
-  axios.get('/api/getAllPeople');
+export function getOthers(cb) {
+  axios.get('/api/others')
+  .then(({ data }) => {
+    if (parseInt(data.code, 10) === 200) {
+      cb(data.others);
+    } else {
+      console.log(data.msg);
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 }

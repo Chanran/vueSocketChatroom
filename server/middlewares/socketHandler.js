@@ -40,6 +40,7 @@ function messageHandler(socketio) {
 
     // 私聊
     socket.on('private', (data) => {
+      console.log(data);
       let from = users.findUser(sessionId);
       if (from) {
         let to = users.findUser(data.toSessionId);

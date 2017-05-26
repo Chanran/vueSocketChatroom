@@ -14,7 +14,7 @@ import {
   GridItem,
   Group } from 'vux';
 
-import { logout } from '../../api/api';
+import { logout, getOthers } from '../../api/api';
 
 export default {
   name: 'Chat',
@@ -38,16 +38,7 @@ export default {
   },
   data() {
     return {
-      people: [
-        {
-          label: 'test',
-          value: 'test',
-        },
-        {
-          label: 'test2',
-          value: 'test2',
-        },
-      ],
+      people: [],
       talkingTo: -1,
       talkToPeople: [],
       showMenus: false,
@@ -55,12 +46,26 @@ export default {
     };
   },
   mounted() {
+    const that = this;
     this.$socket.emit('login');
+    getOthers((others) => {
+      that.people.splice(0);
+      others.map((other) => {
+        that.people.push({
+          label: other.name,
+          value: other.sessionId,
+        });
+        return true;
+      });
+    });
   },
   methods: {
     sendMsg() {
       if (this.message.trim() !== '') {
-        this.$socket.emit('sendMsg', this.message);
+        this.$socket.emit('private', {
+          msg: this.message,
+          toSessionId: 'test',
+        });
         this.message = '';
       } else {
         this.$vux.alert.show({
