@@ -1,6 +1,6 @@
 /*
  * 内部数据结构：用户列表
- *  [{name, sessionId, socket} ...]
+ *  [{username, sessionId, socket} ...]
  * */
 let users = [];
 
@@ -11,17 +11,16 @@ function findInUsers(sessionId) { // 通过sessionId查找
   }
   return index;
 }
-function addUser(name, sessionId) { // 添加用户
-  console.log(users);
+function addUser(username, sessionId) { // 添加用户
   let index = findInUsers(sessionId);
   if (index === -1) {
     users.push({
-      name,
+      username,
       sessionId,
       socket: null,
     });
-  } else if (users[index].name !== name) {
-    users[index].name = name;
+  } else if (users[index].username !== username) {
+    users[index].username = username;
   }
 }
 function setUserSocket(sessionId, socket) { // 更新用户socket
@@ -35,22 +34,36 @@ function findUser(sessionId) { // 查找
   return index > -1 ? users[index] : null;
 }
 function otherUsers(sessionId) { // 其他人
-  console.log(users);
   let results = [];
   for (let j = 0, len = users.length; j < len; j += 1) {
     if (users[j].sessionId !== sessionId) {
       results.push({
         sessionId: users[j].sessionId,
-        name: users[j].name,
+        username: users[j].username,
       });
     }
   }
   return results;
 }
 
+function allUsers() {
+  return users;
+}
+
+function getUsername(sessionId) {
+  for (let i = 0; i < users.length; i += 1) {
+    if (users[i].sessionid === sessionId) {
+      return users[i].username;
+    }
+  }
+  return '404NotFound';
+}
+
 module.exports = {
   findUser,
   otherUsers,
+  allUsers,
+  getUsername,
   addUser,
   setUserSocket,
 };
