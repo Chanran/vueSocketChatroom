@@ -10,23 +10,11 @@ export default {
     actions: actions
   },
   name: 'Chat',
-  directives: {
-    TransferDom,
-  },
+  // directives: {
+  //   TransferDom,
+  // },
   components: {
-    Divider,
-    Actionsheet,
-    XHeader,
-    Popup,
-    Tab,
-    TabItem,
-    Tabbar,
-    TabbarItem,
-    XButton,
-    XInput,
-    Grid,
-    GridItem,
-    Group,Card, List, myText, Message
+    Card, List, myText, Message
   },
   data() {
     return {
@@ -59,16 +47,16 @@ export default {
     });
 
     // 聊天室成员
-    getOthers((others) => {
-      that.people.splice(0);
-      others.map((other) => {
-        that.people.push({
-          label: other.name,
-          value: other.sessionId,
-        });
-        return true;
-      });
-    });
+    // getOthers((others) => {
+    //   that.people.splice(0);
+    //   others.map((other) => {
+    //     that.people.push({
+    //       label: other.name,
+    //       value: other.sessionId,
+    //     });
+    //     return true;
+    //   });
+    // });
   },
   methods: {
     sendMsg() {
