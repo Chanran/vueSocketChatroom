@@ -24,16 +24,27 @@ function messageHandler(socketio) {
     socket.on('login', () => {
       let unsignedCookie = urlencode.decode(getSessionId(cookies, 'ioUser'));
       sessionId = cookieParser.signedCookie(unsignedCookie, secret);
+      // 设置登录的用户的socket
       users.setUserSocket(sessionId, socket);
+      let username = users.getUsername(sessionId);
+      console.log(username);
+
+      // 广播通知有用户进入聊天室
+      socket.broadcast.emit('someOneLogin', {
+        user: username,
+        msg: `${username} 进入了房间`,
+      });
     });
 
     // 广播
     socket.on('broadcast', (data) => {
-      let from = users.findUser(sessionId);
-      if (from) {
+      let username = users.getUsername(sessionId);
+      let msg = data.msg;
+      console.log(data);
+      if (username) {
         socket.broadcast.emit('broadcast', {
-          name: from.name,
-          msg: data.msg,
+          username,
+          msg,
         });
       }
     });
@@ -41,12 +52,12 @@ function messageHandler(socketio) {
     // 私聊
     socket.on('private', (data) => {
       console.log(data);
-      let from = users.findUser(sessionId);
-      if (from) {
+      let username = users.getUsername(sessionId);
+      if (username) {
         let to = users.findUser(data.toSessionId);
         if (to) {
           to.socket.emit('private', {
-            name: from.name,
+            username,
             msg: data.msg,
           });
         }
