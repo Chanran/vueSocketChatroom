@@ -4,17 +4,19 @@ import List from './components/list';
 import myText from './components/myText';
 import Message from './components/message';
 import store from './store.js';
+import { XHeader, Actionsheet, TransferDom } from 'vux';
+import mobileHeader from './components/mobileHeader.vue';
 export default {
   store: store,
   vuex: {
     actions: actions
   },
   name: 'Chat',
-  // directives: {
-  //   TransferDom,
-  // },
+  directives: {
+    TransferDom,
+  },
   components: {
-    Card, List, myText, Message
+    Card, List, myText, Message,XHeader,Actionsheet,mobileHeader
   },
   data() {
     return {
@@ -23,6 +25,11 @@ export default {
       talkToPeople: [],
       showMenus: false,
       message: '',
+      menus: {
+        menu1: 'Take Photo',
+        menu2: 'Choose from photos'
+      },
+      showSidebar: false
     };
   },
   sockets: {
@@ -107,11 +114,19 @@ export default {
     logout() {
       const that = this;
       this.$vux.confirm.show({
-        title: '确定要退出聊天室吗？',
+        title: '提示',
+        content: '确定要退出聊天室吗？',
         onConfirm() {
           logout(that);
         },
       });
     },
+    trigger(){
+      this.showSidebar=!this.showSidebar;
+      console.log("showSidebar:"+this.showSidebar);
+    }
   },
+  computed:{
+
+  }
 };

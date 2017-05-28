@@ -33,8 +33,248 @@ const store = new Vuex.Store({
                     }
                 ]
             },
+          {
+            id: 2,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 3,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 4,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 5,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 6,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 7,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 8,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 9,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 10,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 11,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 12,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 13,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 14,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 15,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
+          {
+            id: 16,
+            user: {
+              name: '示例介绍',
+              img: 'static/images/1.jpg'
+            },
+            messages: [
+              {
+                content: 'Hello，这是一个基于Vue + Vuex + Webpack构建的简单chat示例，聊天记录保存在localStorge, 有什么问题可以通过Github Issue问我。',
+                date: now
+              }, {
+                content: '项目地址: https://github.com/coffcer/vue-chat',
+                date: now
+              }
+            ]
+          },
             {
-                id: 2,
+                id: 17,
                 user: {
                     name: 'webpack',
                     img: 'static/images/3.jpg'
