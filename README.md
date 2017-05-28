@@ -28,11 +28,6 @@ npm install
 
 ## 启动
 
-建表(初始化项目的时候运行一次就行)
-```
-npm run db
-```
-
 ```
 npm run dev
 npm run server # 另开一个终端
