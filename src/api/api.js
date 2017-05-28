@@ -11,9 +11,9 @@ import axios from 'axios';
  * @param {string} [ErrorNextRoute=''] 异步请求客户端错误跳转链接
  */
 export function checkLogin(to, from, next, loginNextRoute = '', logoutNextRoute = '', ErrorNextRoute = '') {
-  axios.get('/api/testLogin')
+  axios.get('/api/testlogin')
     .then(({ data }) => {
-      console.log(data);
+      // console.log(data);
       if (parseInt(data.code, 10) === 200) {
         loginNextRoute === '' ? next() : next(loginNextRoute);
       } else {
@@ -40,7 +40,7 @@ export function login(vueInstance, username) {
     },
   })
   .then(({ data }) => {
-    console.log(data);
+    // console.log(data);
     if (parseInt(data.code, 10) === 200) {
       vueInstance.$router.push('/chat');
     } else {
@@ -63,7 +63,7 @@ export function login(vueInstance, username) {
 export function logout(vueInstance) {
   axios.get('/api/logout')
   .then(({ data }) => {
-    console.log(data);
+    // console.log(data);
     if (parseInt(data.code, 10) === 200) {
       vueInstance.$router.push('/login');
     } else {
@@ -90,7 +90,7 @@ export function getOthers(cb) {
   axios.get('/api/others')
   .then(({ data }) => {
     if (parseInt(data.code, 10) === 200) {
-      cb(data.others);
+      cb(data.data);
     } else {
       console.log(data.msg);
     }

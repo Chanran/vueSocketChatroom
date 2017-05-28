@@ -44,11 +44,11 @@ router.get('/logout', (req, res) => {
     });
     res.json({
       code: '200',
-      msg: 'log out successfully',
+      msg: 'success',
     });
   } else {
     res.json({
-      code: '203',
+      code: '202',
       msg: 'log out error,you are not logged in',
     });
   }
@@ -61,7 +61,7 @@ router.get('/others', (req, res) => {
     res.json({
       msg: 'success',
       code: '200',
-      others: users.otherUsers(sessionId),
+      data: users.otherUsers(sessionId),
     });
   } else {
     res.json({
@@ -71,14 +71,16 @@ router.get('/others', (req, res) => {
   }
 });
 
-router.get('/testLogin', (req, res) => {
+router.get('/testlogin', (req, res) => {
   // console.log(req.cookies);
   // console.log(req.signedCookies);
   // console.log(req.session);
-  if (req.session.username) {
+  let username = req.session.username;
+  if (username) {
     res.json({
       msg: 'logged in',
       code: '200',
+      username,
     });
   } else {
     res.json({

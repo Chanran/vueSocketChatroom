@@ -42,6 +42,7 @@ npm run server # 另开一个终端
 
 ## 技术文档
 
+- [api文档](https://www.showdoc.cc/1629169?page_id=14974136)
 - [vue2(前端MVVM框架)](https://cn.vuejs.org/)
 - [vue-router2(前端路由框架)](https://router.vuejs.org/zh-cn/)
 - [vue-loader(webpack的loader,vue-cli使用的)](https://lvyongbo.gitbooks.io/vue-loader/content/)

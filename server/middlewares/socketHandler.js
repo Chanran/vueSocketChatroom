@@ -31,7 +31,10 @@ function messageHandler(socketio) {
 
       // 广播通知有用户进入聊天室
       socket.broadcast.emit('someOneLogin', {
-        user: username,
+        user: {
+          username,
+          sessionId,
+        },
         msg: `${username} 进入了房间`,
       });
     });
@@ -40,7 +43,8 @@ function messageHandler(socketio) {
     socket.on('broadcast', (data) => {
       let username = users.getUsername(sessionId);
       let msg = data.msg;
-      console.log(data);
+      console.log(username);
+      console.log(msg);
       if (username) {
         socket.broadcast.emit('broadcast', {
           username,
