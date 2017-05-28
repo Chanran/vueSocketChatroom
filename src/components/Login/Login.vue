@@ -3,7 +3,7 @@
     <div class="main">
       <header class="header">登录</header>
       <group label-width="4.5em" label-margin-right="2em" label-align="left" >
-        <x-input v-model="username" title="用户名" placeholder="请输入用户名"  @keyup.enter="login" autofocus></x-input>
+        <x-input v-model="username" title="用户名" placeholder="请输入用户名" ></x-input>
         <x-button type="primary" text="登录" @click.native="login"></x-button>
       </group>
     </div>
