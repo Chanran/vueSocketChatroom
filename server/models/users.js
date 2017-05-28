@@ -7,8 +7,11 @@ let users = [];
 function findInUsers(sessionId) { // 通过sessionId查找
   let index = -1;
   for (let j = 0, len = users.length; j < len; j += 1) {
-    if (users[j].sessionId === sessionId) { index = j; }
+    if (users[j].sessionId === sessionId) {
+      index = j;
+    }
   }
+  console.log(index);
   return index;
 }
 function addUser(username, sessionId) { // 添加用户
@@ -51,6 +54,7 @@ function allUsers() {
 }
 
 function getUsername(sessionId) {
+  console.log(users.length);
   for (let i = 0; i < users.length; i += 1) {
     if (users[i].sessionid === sessionId) {
       return users[i].username;
