@@ -123,7 +123,6 @@ export default {
     },
     trigger(){
       this.showSidebar=!this.showSidebar;
-      console.log("showSidebar:"+this.showSidebar);
     }
   },
   computed:{

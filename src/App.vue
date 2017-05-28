@@ -13,8 +13,13 @@ export default {
 <style lang="less">
 @import '~vux/src/styles/reset.less';
 
+
 html,body,#app {
     height: 100%;
+  overflow: hidden;
+}
+#app{
+  box-sizing: border-box;
 }
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
