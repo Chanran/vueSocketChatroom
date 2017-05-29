@@ -11,7 +11,6 @@ function findInUsers(sessionId) { // 通过sessionId查找
       index = j;
     }
   }
-  console.log(index);
   return index;
 }
 function addUser(username, sessionId) { // 添加用户
@@ -22,11 +21,15 @@ function addUser(username, sessionId) { // 添加用户
       sessionId,
       socket: null,
     });
-  } else if (users[index].username !== username) {
-    users[index].username = username;
+  } else {
+    if (users[index].username !== username) {
+      users[index].username = username;
+    }
   }
 }
 function setUserSocket(sessionId, socket) { // 更新用户socket
+  // console.log(sessionId);
+  // console.log(users);
   let index = findInUsers(sessionId);
   if (index !== -1) {
     users[index].socket = socket;
@@ -37,6 +40,7 @@ function findUser(sessionId) { // 查找
   return index > -1 ? users[index] : null;
 }
 function otherUsers(sessionId) { // 其他人
+  console.log(users);
   let results = [];
   for (let j = 0, len = users.length; j < len; j += 1) {
     if (users[j].sessionId !== sessionId) {
@@ -54,9 +58,11 @@ function allUsers() {
 }
 
 function getUsername(sessionId) {
-  console.log(users.length);
   for (let i = 0; i < users.length; i += 1) {
-    if (users[i].sessionid === sessionId) {
+    // console.log(users[i].sessionId);
+    // console.log(sessionId);
+    // console.log(users[i].sessionId === sessionId);
+    if (users[i].sessionId === sessionId) {
       return users[i].username;
     }
   }

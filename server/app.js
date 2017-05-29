@@ -22,10 +22,14 @@ app.disable('x-powered-by');
 // 启用session
 app.use(session({
   secret,
+  name: 'iouser',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24,
+    // signed: true,
+    secure: false,
+    expires: new Date(Date.now() + (1000 * 60 * 60 * 24)), // cookie保存一天时间
+    httpOnly: true,
   },
   store: new MongoStore({
     url: dbUrl,
@@ -54,8 +58,8 @@ app.all('*', (req, res, next) => {
 // 路由
 app.use('/api', chat);
 // 上线路由
-// app.get('/dist', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../dist/index.html'));
+// app.get('/chat', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../index.html'));
 // });
 
 // catch 404 and forward to error handler

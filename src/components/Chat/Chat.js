@@ -76,7 +76,8 @@ export default {
       if (this.message.trim() !== '') {
         // 非群聊
         if (this.talkingTo !== -1) {
-          let sessionId = this.people[this.talkToThis].sessionId;
+          console.log(this.people);
+          let sessionId = this.people[this.talkToThis].value;
 
           // 发送私聊消息
           this.$socket.emit('private', {

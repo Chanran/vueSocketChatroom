@@ -10,9 +10,9 @@ const secret = fs.readFileSync(path.resolve(__dirname, '../config/secret.key'), 
 
 function getSessionId(cookieString, cookieName) {
   // console.log(cookieString);
-  let matches = new RegExp(`${cookieName}=([^;]+);`, 'gmi').exec(cookieString);
+  let matches = new RegExp(`${cookieName}=([^;]+)`, 'gmi').exec(cookieString);
   // console.log(matches);
-  return matches[1] ? matches[1] : null;
+  return matches ? matches[1] : null;
 }
 
 function messageHandler(socketio) {
@@ -22,12 +22,12 @@ function messageHandler(socketio) {
     let sessionId = null;
 
     socket.on('login', () => {
-      let unsignedCookie = urlencode.decode(getSessionId(cookies, 'ioUser'));
+      let unsignedCookie = urlencode.decode(getSessionId(cookies, 'iouser'));
       sessionId = cookieParser.signedCookie(unsignedCookie, secret);
       // 设置登录的用户的socket
       users.setUserSocket(sessionId, socket);
       let username = users.getUsername(sessionId);
-      console.log(username);
+      // console.log(username);
 
       // 广播通知有用户进入聊天室
       socket.broadcast.emit('someOneLogin', {
@@ -46,6 +46,7 @@ function messageHandler(socketio) {
       console.log(username);
       console.log(msg);
       if (username) {
+        console.log('broadcast');
         socket.broadcast.emit('broadcast', {
           username,
           msg,

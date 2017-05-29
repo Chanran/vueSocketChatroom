@@ -9,19 +9,10 @@ router.get('/login', (req, res) => {
   // let ip = req.connection.remoteAddress;
   // let port = req.connection.remotePort;
   let sessionId = req.session.id;
-  console.log(sessionId);
 
   if (username) {
     req.session.username = username;
     users.addUser(username, sessionId);
-    res.cookie('ioUser',
-      sessionId,
-      {
-        signed: true,
-        secure: false,
-        expires: new Date(Date.now() + (1000 * 60 * 60 * 24)), // cookie保存一天时间
-        httpOnly: true,
-      });
 
     res.json({
       msg: 'success',
@@ -42,6 +33,7 @@ router.get('/logout', (req, res) => {
         console.log(err);
       }
     });
+    res.clearCookie('iouser', { path: '/' });
     res.json({
       code: '200',
       msg: 'success',
@@ -55,8 +47,8 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/others', (req, res) => {
-  const sessionId = req.session.id;
-  const username = req.session.username;
+  let sessionId = req.session.id;
+  let username = req.session.username;
   if (sessionId && username) {
     res.json({
       msg: 'success',
