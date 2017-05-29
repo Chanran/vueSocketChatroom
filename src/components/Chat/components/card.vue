@@ -1,6 +1,7 @@
 <script>
   import { actions } from '../store';
   import { logout } from '../../../api/api';
+  import  avatar  from'./avatar.vue';
   export default {
     vuex: {
       actions: actions,
@@ -8,6 +9,9 @@
         user: ({user}) => user,
         filterKey: ({filterKey}) => filterKey
       }
+    },
+    components:{
+      avatar
     },
     methods: {
       onKeyup (e) {
@@ -29,7 +33,7 @@
 <template>
   <div class="card">
     <header title="退出登录" @click="logout">
-      <img class="avatar" width="40" height="40" :alt="user.name" :src="user.img">
+      <avatar :user="user"></avatar>
       <p class="name">{{user.name}}</p>
       <span class="logout"></span>
     </header>
@@ -41,7 +45,7 @@
 
 <style scoped lang="less">
   .card {
-    padding: 12px;
+    padding: 12px 12px 12px 15px;
     border-bottom: solid 1px #24272C;
     header {
       cursor: pointer;
@@ -64,12 +68,6 @@
       margin-top: 10px;
     }
 
-    .avatar, .name {
-      vertical-align: middle;
-    }
-    .avatar {
-      border-radius: 2px;
-    }
     .name {
       display: inline-block;
       margin: 0 0 0 15px;
@@ -87,6 +85,5 @@
       outline: none;
       background-color: #26292E;
     }
-
   }
 </style>

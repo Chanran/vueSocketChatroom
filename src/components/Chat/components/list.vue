@@ -1,6 +1,6 @@
 <script>
   import { actions } from '../store';
-
+  import avatar from './avatar.vue';
   export default {
     vuex: {
       actions: actions,
@@ -13,6 +13,9 @@
         // 当前会话index
         currentId: ({currentSessionId}) => currentSessionId
       }
+    },
+    components:{
+      avatar
     }
   };
 </script>
@@ -20,8 +23,8 @@
 <template>
   <div class="list">
     <ul>
-      <li v-for="item in sessions" :class="{ active: item.id === currentId }" @click="selectSession(item.id)">
-        <img class="avatar" width="30" height="30" :alt="item.user.name" :src="item.user.img">
+      <li v-for="item in sessions" :class="{ active: item.user.id === currentId }" @click="selectSession(item.user.id)">
+        <avatar :user="item.user"></avatar>
         <p class="name">{{item.user.name}}</p>
       </li>
     </ul>
@@ -44,12 +47,7 @@
         background-color: rgba(255, 255, 255, 0.1);
       }
     }
-    .avatar, .name {
-      vertical-align: middle;
-    }
-    .avatar {
-      border-radius: 2px;
-    }
+
     .name {
       display: inline-block;
       margin: 0 0 0 15px;

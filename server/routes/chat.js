@@ -75,10 +75,12 @@ router.get('/testLogin', (req, res) => {
   // console.log(req.cookies);
   // console.log(req.signedCookies);
   // console.log(req.session);
-  if (req.session.username) {
+  let username = req.session.username;
+  if (username) {
     res.json({
       msg: 'logged in',
       code: '200',
+      username: username,
     });
   } else {
     res.json({

@@ -24,8 +24,7 @@ Vue.directive('scroll-bottom',function(el,binding){
     el.scrollTop = el.scrollHeight - el.clientHeight;
   });
 });
-new Vue({
+let vue = new Vue({
   router,
   render: h => h(App)
 }).$mount('#app-box');
-

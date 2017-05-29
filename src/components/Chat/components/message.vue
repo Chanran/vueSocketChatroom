@@ -1,9 +1,16 @@
 <script>
+  import avatar from './avatar.vue';
   export default {
     vuex: {
       getters: {
         user: ({user}) => user,
-        session: ({sessions, currentSessionId}) => sessions.find(session => session.id === currentSessionId)
+        session: function ({sessions, currentSessionId}) {
+          var result = sessions.find(session => session.user.id === currentSessionId);
+          if (!result) {
+           result =  sessions.find(session => session.user.id === -1);
+          }
+          return result;
+        },
       }
     },
     filters: {
@@ -14,7 +21,11 @@
         }
         return date.getHours() + ':' + date.getMinutes();
       }
+    },
+    components: {
+      avatar
     }
+//
 
   };
 </script>
@@ -27,8 +38,9 @@
           <span>{{ item.date | time }}</span>
         </p>
         <div class="main" :class="{ self: item.self }">
-          <img class="avatar" width="30" height="30" :src="item.self ? user.img : session.user.img"/>
-          <div class="text">{{ item.content }}</div>
+          <avatar v-if="item.self" :user="user"></avatar>
+          <avatar :session="item.sessionId" :canClick="session.user.id===-1" v-else="item.self" :hasTitle="true" :user="item"></avatar>
+          <div class="text">{{ item.content }} </div>
         </div>
       </li>
     </ul>
@@ -61,6 +73,7 @@
       float: left;
       margin: 0 10px 0 0;
       border-radius: 3px;
+
     }
     .text {
       display: inline-block;

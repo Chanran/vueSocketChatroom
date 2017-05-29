@@ -1,56 +1,61 @@
 <script>
-import { actions } from '../store';
+  import { actions } from '../store';
 
-export default {
+  export default {
     vuex: {
-        actions: actions
+      actions: actions,
+      getters:{
+        user: ({user}) => user,
+      }
     },
     data () {
-        return {
-            content: ''
-        };
+      return {
+        content: ''
+      };
     },
     methods: {
-        onKeyup (e) {
-            if (e.ctrlKey && e.keyCode === 13 && this.content.length) {
-                this.sendMessage(this.content);
-                this.content = '';
-            }
+      onKeyup (e) {
+        if (e.ctrlKey && e.keyCode === 13 && this.content.length) {
+          this.sendMessage(this.user.id,this.user.name,this.content);
+          this.content = '';
         }
+      }
     }
-};
+  };
 </script>
 
 <template>
-<div class="text  inputMessage">
+  <div class="text  inputMessage">
     <textarea placeholder="可按 Ctrl + Enter 发送" v-model="content" @keyup="onKeyup"></textarea>
-  <a href="javascript:void(0)" class="sendbtn">发送</a>
-</div>
+    <a href="javascript:void(0)" class="sendbtn">发送</a>
+  </div>
 </template>
 
 <style lang="less" scoped>
-.text {
-    border-top: solid 1px #ddd;
+  .text {
+    border-top: solid 1px #DDDDDD;
     textarea {
       padding: 20px 10px 10px;
-        height: 100%;
-        width: 100%;
-        border: none;
-        outline: none;
-        font-family: "Micrsofot Yahei";
-        resize: none;
-        box-sizing: border-box;
+      height: 100%;
+      width: 100%;
+      border: none;
+      outline: none;
+      font-family: "Micrsofot Yahei";
+      resize: none;
+      box-sizing: border-box;
     }
-}
-.inputMessage {
-  position: relative;
-  height: 25%;
-  padding-bottom: 40px;
-  padding-top: 10px;
-  box-sizing: border-box;
-  background-color: #FFFFFF;
-}
-  .sendbtn{
+  }
+
+  .inputMessage {
+    position: relative;
+    height: 25%;
+    padding-bottom: 40px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+  }
+
+  .sendbtn {
     position: absolute;
     width: 70px;
     height: 20px;
@@ -65,7 +70,7 @@ export default {
     right: 30px;
     bottom: 3px;
     padding: 3px;
-    &:hover{
+    &:hover {
       background-color: #EEEEEE;
     }
   }
