@@ -6,6 +6,7 @@
       actions: actions,
       getters:{
         user: ({user}) => user,
+        sessions: ({sessions}) => sessions
       }
     },
     data () {
@@ -19,6 +20,22 @@
           this.sendMessage(this.user.id,this.user.name,this.content);
           this.content = '';
         }
+      },
+      addPerson(sessions){
+        var id = Math.floor(Math.random()*100);
+        var name ="克隆体 "+id+"号";
+        sessions.push({
+          user: {
+            name: name,
+            id: id
+          },
+          messages:[{
+            name: name,
+            sessionId: id,
+            content: "你好,我是"+name,
+            date:new Date()
+          }]
+        })
       }
     }
   };
@@ -27,7 +44,7 @@
 <template>
   <div class="text  inputMessage">
     <textarea placeholder="可按 Ctrl + Enter 发送" v-model="content" @keyup="onKeyup"></textarea>
-    <a href="javascript:void(0)" class="sendbtn">发送</a>
+    <a href="javascript:void(0)" class="sendbtn" @click="addPerson(sessions)">发送</a>
   </div>
 </template>
 

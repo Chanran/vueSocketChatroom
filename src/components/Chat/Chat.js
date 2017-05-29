@@ -7,6 +7,8 @@ import store from "./store.js";
 import { XHeader, Actionsheet, TransferDom } from "vux";
 import mobileHeader from "./components/mobileHeader.vue";
 import axios from "axios";
+import { mapState } from 'vuex'
+var now = new Date();
 export default {
   store: store,
   vuex: {
@@ -38,7 +40,17 @@ export default {
       console.log(data);
     }
   },
-  beforeMount(){
+
+  created(){
+    //获取登录用户信息
+    axios.get("/api/testLogin")
+    .then(({data}) => {
+      this.initData({id:data.id,name:data.username});
+      this.getUserName({id:data.id,name:data.username});//设置登录用户
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   },
   mounted() {
@@ -65,14 +77,7 @@ export default {
     //     return true;
     //   });
     // });
-    //获取登录用户信息
-    axios.get("/api/testLogin")
-    .then(({data}) => {
-      this.getUserName(data.username);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+
   },
   methods: {
     sendMsg() {
@@ -134,6 +139,5 @@ export default {
     trigger(){
       this.showSidebar = !this.showSidebar;
     }
-  }
-
+  },
 };

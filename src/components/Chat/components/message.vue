@@ -3,28 +3,36 @@
   export default {
     vuex: {
       getters: {
-        user: ({user}) => user,
-        session: function ({sessions, currentSessionId}) {
-          var result = sessions.find(session => session.user.id === currentSessionId);
-          if (!result) {
-           result =  sessions.find(session => session.user.id === -1);
-          }
-          return result;
-        },
-      }
+      },
     },
     filters: {
       // 将日期过滤为 hour:minutes
       time (date) {
-        if (typeof date === 'string') {
-          date = new Date(date);
-        }
-        return date.getHours() + ':' + date.getMinutes();
+//        if (typeof date === 'string') {
+//          date = new Date(date);
+//        }
+//        return date.getHours() + ':' + date.getMinutes();
+        return date;
       }
     },
     components: {
       avatar
+    },
+    computed:{
+      session(){
+        var sessions = this.$store.state.sessions;
+        var currentSessionId = this.$store.state.currentSessionId;
+        var result = sessions.find(session => session.user.id === currentSessionId);
+        if (!result) {
+          result = sessions.find(session => session.user.id === -1);
+        }
+        return result;
+      },
+      user(){
+        return this.$store.state.user;
+      }
     }
+
 //
 
   };
