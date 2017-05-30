@@ -30,7 +30,6 @@
     "urlencode": "^1.1.0",
     "vue": "^2.2.2",
     "vue-router": "^2.2.0",
-    "vue-socket.io": "^2.1.1-a",
     "vux": "^2.2.1"
   },
   "devDependencies": {
