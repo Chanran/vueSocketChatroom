@@ -57,27 +57,31 @@ export default {
     this.$options.sockets.broadcast = (data) => {
       console.log(data);
     };
+    this.$options.sockets.private = (data) => {
+      console.log(data);
+    };
 
     // 聊天室成员
-    getOthers((others) => {
-      console.log(others);
-      that.people.splice(0);
-      others.map((other) => {
-        that.people.push({
-          label: other.username,
-          value: other.sessionId,
+    setInterval(() => {
+      getOthers((others) => {
+        that.people.splice(0);
+        others.map((other) => {
+          that.people.push({
+            label: other.username,
+            value: other.sessionId,
+          });
+          return true;
         });
-        return true;
       });
-    });
+    }, 2000);
   },
   methods: {
     sendMsg() {
       if (this.message.trim() !== '') {
         // 非群聊
         if (this.talkingTo !== -1) {
-          console.log(this.people);
-          let sessionId = this.people[this.talkToThis].value;
+          console.log(this.people[this.talkingTo]);
+          let sessionId = this.people[this.talkingTo].value;
 
           // 发送私聊消息
           this.$socket.emit('private', {
