@@ -18,7 +18,13 @@ FastClick.attach(document.body);
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
-new Vue({
+// 发送消息后滚动到底部
+Vue.directive('scroll-bottom',function(el,binding){
+  Vue.nextTick(function () {
+    el.scrollTop = el.scrollHeight - el.clientHeight;
+  });
+});
+let vue = new Vue({
   router,
-  render: h => h(App),
+  render: h => h(App)
 }).$mount('#app-box');

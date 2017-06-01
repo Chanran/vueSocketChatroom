@@ -15,27 +15,26 @@ import {
   Group } from 'vux';
 
 import { logout, getOthers } from '../../api/api';
-// const socket = null;
+
+import { actions } from "./store";
+import Card from "./components/card";
+import List from "./components/list";
+import myText from "./components/myText";
+import Message from "./components/message";
+import store from "./store.js";
+import mobileHeader from "./components/mobileHeader.vue";
+import axios from "axios";
+import { mapState } from 'vuex'
+var now = new Date();
 
 export default {
-  name: 'Chat',
-  directives: {
-    TransferDom,
+  store: store,
+  vuex: {
+    actions: actions
   },
+  name: "Chat",
   components: {
-    Divider,
-    Actionsheet,
-    XHeader,
-    Popup,
-    Tab,
-    TabItem,
-    Tabbar,
-    TabbarItem,
-    XButton,
-    XInput,
-    Grid,
-    GridItem,
-    Group,
+    Card, List, myText, Message, mobileHeader
   },
   data() {
     return {
@@ -43,8 +42,25 @@ export default {
       talkingTo: -1,
       talkToPeople: [],
       showMenus: false,
-      message: '',
+      message: "",
+      menus: {
+        menu1: "Take Photo",
+        menu2: "Choose from photos"
+      },
+      showSidebar: false
     };
+  },
+  created(){
+    //获取登录用户信息
+    axios.get("/api/testLogin")
+    .then(({data}) => {
+      this.initData({id:data.id,name:data.username});
+      this.getUserName({id:data.id,name:data.username});//设置登录用户
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
   },
   mounted() {
     const socket = window.io('http://localhost:8080');
@@ -89,10 +105,10 @@ export default {
           // 发送私聊消息
           socket.emit('private', {
             msg: this.message,
-            toSessionId: sessionId,
+            toSessionId: sessionId
           });
           // 清除输入框
-          this.message = '';
+          this.message = "";
 
         // 群聊
         } else {
@@ -101,11 +117,11 @@ export default {
             msg: this.message,
           });
           // 清除输入框
-          this.message = '';
+          this.message = "";
         }
       } else {
         this.$vux.alert.show({
-          title: '发送消息不能为空！',
+          title: "发送消息不能为空！"
         });
       }
     },
@@ -128,11 +144,16 @@ export default {
     logout() {
       const that = this;
       this.$vux.confirm.show({
-        title: '确定要退出聊天室吗？',
+        title: "提示",
+        content: "确定要退出聊天室吗？",
         onConfirm() {
           logout(that);
-        },
+        }
       });
     },
+    /*侧边栏状态管理*/
+    trigger(){
+      this.showSidebar = !this.showSidebar;
+    }
   },
 };
