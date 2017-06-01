@@ -21,10 +21,8 @@ function addUser(username, sessionId) { // 添加用户
       sessionId,
       socket: null,
     });
-  } else {
-    if (users[index].username !== username) {
-      users[index].username = username;
-    }
+  } else if (users[index].username !== username) {
+    users[index].username = username;
   }
 }
 function setUserSocket(sessionId, socket) { // 更新用户socket

@@ -52,8 +52,12 @@ export default {
     // 告诉socket server该用户登录的动作
     socket.emit('login');
     // 监听socket server其他用户登录的消息
-    socket.on('someOneLogin', (data) => {
-      console.log(data);
+    socket.on('someOneLogin', ({ user, msg }) => {
+      that.people.push({
+        label: user.username,
+        value: user.sessionId,
+      });
+      console.log(msg);
     });
     // 监听socket server 的广播
     socket.on('broadcast', (data) => {
@@ -64,18 +68,16 @@ export default {
     });
 
     // 聊天室成员
-    setInterval(() => {
-      getOthers((others) => {
-        that.people.splice(0);
-        others.map((other) => {
-          that.people.push({
-            label: other.username,
-            value: other.sessionId,
-          });
-          return true;
+    getOthers((others) => {
+      that.people.splice(0);
+      others.map((other) => {
+        that.people.push({
+          label: other.username,
+          value: other.sessionId,
         });
+        return true;
       });
-    }, 2000);
+    });
   },
   methods: {
     sendMsg() {

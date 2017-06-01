@@ -46,12 +46,12 @@ function messageHandler(socketio) {
     socket.on('broadcast', (data) => {
       let username = users.getUsername(sessionId);
       let msg = data.msg;
-      console.log(username);
-      console.log(msg);
       if (username) {
-        console.log('broadcast');
         socket.broadcast.emit('broadcast', {
-          username,
+          user: {
+            sessionId,
+            username,
+          },
           msg,
         });
       }
@@ -59,15 +59,16 @@ function messageHandler(socketio) {
 
     // 私聊
     socket.on('private', (data) => {
-      console.log(data);
       let username = users.getUsername(sessionId);
       if (username) {
         let to = users.findUser(data.toSessionId);
         if (to) {
           to.socket.emit('private', {
-            username,
+            user: {
+              sessionId,
+              username,
+            },
             msg: data.msg,
-            sessionId,
           });
         }
       }
