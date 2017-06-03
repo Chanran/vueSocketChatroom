@@ -59,14 +59,18 @@ export default {
       });
       console.log(msg);
     });
+    // 监听socket server 其他用户退出的消息
+    socket.on('quit', (data) => {
+      console.log(data);
+    });
     // 监听socket server 的广播
     socket.on('broadcast', (data) => {
       console.log(data);
     });
+    // 监听私聊信息
     socket.on('private', (data) => {
       console.log(data);
     });
-
     // 聊天室成员
     getOthers((others) => {
       that.people.splice(0);

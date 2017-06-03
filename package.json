@@ -23,6 +23,7 @@
     "express": "~4.13.1",
     "express-session": "^1.15.2",
     "fastclick": "^1.0.6",
+    "moment": "^2.18.1",
     "mongoose": "^4.10.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",

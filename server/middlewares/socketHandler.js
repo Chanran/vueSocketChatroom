@@ -5,6 +5,7 @@ const path = require('path');
 const users = require('../models/users');
 const cookieParser = require('cookie-parser');
 const urlencode = require('urlencode');
+const moment = require('moment');
 
 const secret = fs.readFileSync(path.resolve(__dirname, '../config/secret.key'), 'utf8');
 
@@ -24,7 +25,7 @@ function messageHandler(socketio) {
     socket.on('login', () => {
       let unsignedCookie = urlencode.decode(getSessionId(cookies, 'iouser'));
       sessionId = cookieParser.signedCookie(unsignedCookie, secret);
-
+      let time = moment().format('YYYY/MM/DD HH:mm:ss');
       if (sessionId) {
         // 设置登录的用户的socket
         users.setUserSocket(sessionId, socket);
@@ -38,6 +39,7 @@ function messageHandler(socketio) {
             sessionId,
           },
           msg: `${username} 进入了房间`,
+          time,
         });
       }
     });
@@ -46,6 +48,7 @@ function messageHandler(socketio) {
     socket.on('broadcast', (data) => {
       let username = users.getUsername(sessionId);
       let msg = data.msg;
+      let time = moment().format('YYYY/MM/DD HH:mm:ss');
       if (username) {
         socket.broadcast.emit('broadcast', {
           user: {
@@ -53,6 +56,7 @@ function messageHandler(socketio) {
             username,
           },
           msg,
+          time,
         });
       }
     });
@@ -60,6 +64,7 @@ function messageHandler(socketio) {
     // 私聊
     socket.on('private', (data) => {
       let username = users.getUsername(sessionId);
+      let time = moment().format('YYYY/MM/DD HH:mm:ss');
       if (username) {
         let to = users.findUser(data.toSessionId);
         if (to) {
@@ -69,13 +74,24 @@ function messageHandler(socketio) {
               username,
             },
             msg: data.msg,
+            time,
           });
         }
       }
     });
 
     socket.on('disconnect', () => {
-      console.log(socket.id, '断开连接');
+      let username = users.getUsername(sessionId);
+      console.log(username, '已退出聊天室');
+      let time = moment().format('YYYY/MM/DD HH:mm:ss');
+      socket.broadcast.emit('quit', {
+        user: {
+          sessionId,
+          username,
+        },
+        msg: `${username} 退出了聊天室`,
+        time,
+      });
     });
   });
 }
