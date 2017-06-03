@@ -4,7 +4,8 @@ import Vue from 'vue';
 import FastClick from 'fastclick';
 import VueRouter from 'vue-router';
 import { AlertPlugin, ConfirmPlugin } from 'vux';
-import router from './router/index';
+import router from './router';
+import store from './store';
 import App from './App';
 
 
@@ -20,5 +21,6 @@ Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app-box');
