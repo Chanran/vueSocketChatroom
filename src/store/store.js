@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import types from './mutation-types';
+import * as types from './mutation-types';
 
 Vue.use(Vuex);
 const debug = process.env.NODE_ENV !== 'production';

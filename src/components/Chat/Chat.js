@@ -13,6 +13,9 @@ import {
   Grid,
   GridItem,
   Group } from 'vux';
+import {
+  mapActions,
+  mapGetters } from 'vuex';
 
 import { logout, getOthers } from '../../api/api';
 // const socket = null;
@@ -72,18 +75,20 @@ export default {
       console.log(data);
     });
     // 聊天室成员
-    getOthers((others) => {
-      that.people.splice(0);
-      others.map((other) => {
-        that.people.push({
-          label: other.username,
-          value: other.sessionId,
-        });
-        return true;
-      });
-    });
+    this.getOthers();
+  },
+  computed: {
+    ...mapGetters([
+      'people',
+      'talkingTo',
+      'talkToPeople',
+    ]),
   },
   methods: {
+    ...mapActions([
+      'getOthters',
+      'setTalkingTo',
+    ]),
     sendMsg() {
       const socket = window.io('http://localhost:8080');
       if (this.message.trim() !== '') {
