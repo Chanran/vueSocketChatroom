@@ -17,7 +17,7 @@ import {
   mapActions,
   mapGetters } from 'vuex';
 
-import { logout, getOthers } from '../../api/api';
+import { logout } from '../../api/api';
 // const socket = null;
 
 export default {
@@ -42,9 +42,6 @@ export default {
   },
   data() {
     return {
-      people: [],
-      talkingTo: -1,
-      talkToPeople: [],
       showMenus: false,
       message: '',
     };
@@ -56,7 +53,7 @@ export default {
     socket.emit('login');
     // 监听socket server其他用户登录的消息
     socket.on('someOneLogin', ({ user, msg }) => {
-      that.people.push({
+      that.addPeople({
         label: user.username,
         value: user.sessionId,
       });
@@ -86,15 +83,16 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getOthters',
+      'getOthers',
       'setTalkingTo',
+      'addTalkToPeople',
+      'addPeople',
     ]),
     sendMsg() {
       const socket = window.io('http://localhost:8080');
       if (this.message.trim() !== '') {
         // 非群聊
         if (this.talkingTo !== -1) {
-          console.log(this.people[this.talkingTo]);
           let sessionId = this.people[this.talkingTo].value;
 
           // 发送私聊消息
@@ -121,16 +119,16 @@ export default {
       }
     },
     talkToThis(index) {
-      this.talkingTo = index;
+      this.setTalkingTo(index);
     },
     choosePerson(value) {
       for (let i = 0; i < this.people.length; i += 1) {
         if (this.people[i].value === value) {
           if (this.talkToPeople.includes(i)) {
-            this.talkingTo = i;
+            this.setTalkingTo(i);
           } else {
-            this.talkToPeople.push(i);
-            this.talkingTo = i;
+            this.addTalkToPeople(i);
+            this.setTalkingTo(i);
           }
           break;
         }
