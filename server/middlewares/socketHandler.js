@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 const urlencode = require('urlencode');
 const moment = require('moment');
 
+const { addRecord } = require('../models/record');
+
 const secret = fs.readFileSync(path.resolve(__dirname, '../config/secret.key'), 'utf8');
 
 function getSessionId(cookieString, cookieName) {
@@ -47,6 +49,7 @@ function messageHandler(socketio) {
     // 广播
     socket.on('broadcast', (data) => {
       let username = users.getUsername(sessionId);
+      // console.log(username);
       let msg = data.msg;
       let time = moment().format('YYYY/MM/DD HH:mm:ss');
       if (username) {
@@ -58,6 +61,9 @@ function messageHandler(socketio) {
           msg,
           time,
         });
+
+        // 储存聊天记录
+        addRecord(username, sessionId, msg, time);
       }
     });
 
