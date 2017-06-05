@@ -11,22 +11,27 @@ const { addRecord } = require('../models/record');
 
 const secret = fs.readFileSync(path.resolve(__dirname, '../config/secret.key'), 'utf8');
 
-function getSessionId(cookieString, cookieName) {
+function getUnSignedCookie(cookieString, cookieName) {
   // console.log(cookieString);
   let matches = new RegExp(`${cookieName}=([^;]+)`, 'gmi').exec(cookieString);
   // console.log(matches);
   return matches ? matches[1] : null;
 }
 
+function getSessionId(socket) {
+  let cookies = socket.request.headers.cookie;
+  let unsignedCookie = urlencode.decode(getUnSignedCookie(cookies, 'iouser'));
+  let sessionId = cookieParser.signedCookie(unsignedCookie, secret);
+  return sessionId;
+}
+
+
 function messageHandler(socketio) {
   socketio.on('connection', (socket) => {
     console.log(socket.id, '已连接');
-    let cookies = socket.request.headers.cookie;
-    let sessionId = null;
 
     socket.on('login', () => {
-      let unsignedCookie = urlencode.decode(getSessionId(cookies, 'iouser'));
-      sessionId = cookieParser.signedCookie(unsignedCookie, secret);
+      let sessionId = getSessionId(socket);
       console.log(sessionId);
       let time = moment().format('YYYY/MM/DD HH:mm:ss');
       if (sessionId) {
@@ -49,6 +54,8 @@ function messageHandler(socketio) {
 
     // 广播
     socket.on('broadcast', (data) => {
+      let sessionId = getSessionId(socket);
+      console.log(sessionId);
       let username = users.getUsername(sessionId);
       // console.log(username);
       let msg = data.msg;
@@ -70,6 +77,7 @@ function messageHandler(socketio) {
 
     // 私聊
     socket.on('private', (data) => {
+      let sessionId = getSessionId(socket);
       let username = users.getUsername(sessionId);
       let time = moment().format('YYYY/MM/DD HH:mm:ss');
       if (username) {
@@ -88,6 +96,7 @@ function messageHandler(socketio) {
     });
 
     socket.on('disconnect', () => {
+      let sessionId = getSessionId(socket);
       let username = users.getUsername(sessionId);
       console.log(username, '已退出聊天室');
       let time = moment().format('YYYY/MM/DD HH:mm:ss');

@@ -19,7 +19,7 @@ const record = new mongoose.Schema({
   time: String,
 });
 
-const RecordModel = mongoose.model('record', record);
+const RecordModel = mongoose.model('records', record);
 
 /**
  * 添加一条聊天记录
@@ -30,7 +30,11 @@ const RecordModel = mongoose.model('record', record);
  * @param {string} time
  */
 function addRecord(username, sessionId, msg, time) {
-  if (username || msg || sessionId || time) {
+  // console.log(username);
+  // console.log(sessionId);
+  // console.log(msg);
+  // console.log(time);
+  if (!username || !msg || !sessionId || !time) {
     return false;
   }
   let oneRecord = new RecordModel({
@@ -40,10 +44,11 @@ function addRecord(username, sessionId, msg, time) {
     time,
   });
 
-  oneRecord.save((err) => {
+  oneRecord.save((err, docs) => {
     if (err) {
       console.log(err);
     }
+    console.log(docs);
   });
 
   return true;
