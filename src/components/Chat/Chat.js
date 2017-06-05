@@ -73,12 +73,14 @@ export default {
     });
     // 聊天室成员
     this.getOthers();
+    this.getRecords();
   },
   computed: {
     ...mapGetters([
       'people',
       'talkingTo',
       'talkToPeople',
+      'records',
     ]),
   },
   methods: {
@@ -87,6 +89,7 @@ export default {
       'setTalkingTo',
       'addTalkToPeople',
       'addPeople',
+      'getRecords',
     ]),
     sendMsg() {
       const socket = window.io('http://localhost:8080');

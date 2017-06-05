@@ -54,6 +54,11 @@ function addRecord(username, sessionId, msg, time) {
   return true;
 }
 
+function getAllRecords() {
+  return RecordModel.find({}).exec();
+}
+
 module.exports = {
   addRecord,
+  getAllRecords,
 };

@@ -99,3 +99,17 @@ export function getOthers(cb, errorCb) {
     errorCb(err);
   });
 }
+
+export function getRecords(cb, errorCb) {
+  axios.get('/api/records')
+  .then(({ data }) => {
+    if (parseInt(data.code, 10) === 200) {
+      cb(data.data);
+    } else {
+      console.log(data.msg);
+    }
+  })
+  .catch((err) => {
+    errorCb(err);
+  });
+}

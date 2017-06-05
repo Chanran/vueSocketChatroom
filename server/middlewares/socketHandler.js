@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const urlencode = require('urlencode');
 const moment = require('moment');
 
-const { addRecord } = require('../models/record');
+const { addRecord } = require('../models/records');
 
 const secret = fs.readFileSync(path.resolve(__dirname, '../config/secret.key'), 'utf8');
 

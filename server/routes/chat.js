@@ -1,5 +1,6 @@
 const express = require('express');
 const users = require('../models/users');
+const records = require('../models/records');
 
 const router = express.Router();
 
@@ -77,9 +78,28 @@ router.get('/testlogin', (req, res) => {
   } else {
     res.json({
       msg: 'not log in',
-      code: '203',
+      code: '204',
     });
   }
+});
+
+router.get('/records', (req, res) => {
+  records.getAllRecords()
+  .then((docs) => {
+    console.log(docs);
+    res.json({
+      code: 200,
+      msg: 'success',
+      data: docs,
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    res.json({
+      code: '205',
+      msg: 'get records error',
+    });
+  });
 });
 
 module.exports = router;
