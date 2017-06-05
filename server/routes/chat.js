@@ -9,7 +9,7 @@ router.get('/login', (req, res) => {
   // let ip = req.connection.remoteAddress;
   // let port = req.connection.remotePort;
   let sessionId = req.session.id;
-
+  console.log(sessionId);
   if (username) {
     req.session.username = username;
     users.addUser(username, sessionId);

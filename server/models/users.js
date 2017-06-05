@@ -27,18 +27,17 @@ function addUser(username, sessionId) { // 添加用户
 }
 function setUserSocket(sessionId, socket) { // 更新用户socket
   // console.log(sessionId);
-  // console.log(users);
   let index = findInUsers(sessionId);
   if (index !== -1) {
     users[index].socket = socket;
   }
+  // console.log(users);
 }
 function findUser(sessionId) { // 查找
   let index = findInUsers(sessionId);
   return index > -1 ? users[index] : null;
 }
 function otherUsers(sessionId) { // 其他人
-  console.log(users);
   let results = [];
   for (let j = 0, len = users.length; j < len; j += 1) {
     if (users[j].sessionId !== sessionId) {

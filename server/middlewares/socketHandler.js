@@ -27,6 +27,7 @@ function messageHandler(socketio) {
     socket.on('login', () => {
       let unsignedCookie = urlencode.decode(getSessionId(cookies, 'iouser'));
       sessionId = cookieParser.signedCookie(unsignedCookie, secret);
+      console.log(sessionId);
       let time = moment().format('YYYY/MM/DD HH:mm:ss');
       if (sessionId) {
         // 设置登录的用户的socket
