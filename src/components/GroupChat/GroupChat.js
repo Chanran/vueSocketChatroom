@@ -1,3 +1,5 @@
+import {
+  Divider } from 'vux';
 import Avatar from '../Avatar';
 
 export default {
@@ -5,6 +7,7 @@ export default {
   props: ['records', 'user'],
   components: {
     Avatar,
+    Divider,
   },
   data() {
     return {

@@ -65,6 +65,13 @@ export default {
         label: user.username,
         value: user.sessionId,
       });
+      that.addRecord({
+        username: '',
+        sessionId: '',
+        enter: true,
+        msg,
+        time,
+      });
       console.log(msg);
     });
     // 监听socket server 其他用户退出的消息

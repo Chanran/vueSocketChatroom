@@ -22,3 +22,6 @@ export const ADD_TALK_TO_PEOPLE = 'ADD_TALK_TO_PEOPLE';
 export const ADD_PEOPLE = 'ADD_PEOPLE';
 export const ADD_RECORD = 'ADD_RECORD';
 
+// 增加私聊组
+export const ADD_PRIVATE_GROUP = 'ADD_PRIVATE_GROUP';
+

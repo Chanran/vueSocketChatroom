@@ -3,14 +3,16 @@ import * as types from '../mutation-types';
 
 const initialState = {
   records: [],
+  privateGroups: [],
 };
 
 const getters = {
   records: state => state.records,
+  privateGroups: state => state.privateGroups,
 };
 
 const actions = {
-  // 得到聊天记录
+  // 得到群聊聊天记录
   getRecords({ commit }) {
     commit(types.START_LOADING);
     api.getRecords(
@@ -26,8 +28,13 @@ const actions = {
         commit(types.END_LOADING);
       });
   },
+  // 增加一条群聊聊天记录
   addRecord({ commit }, record) {
     commit(types.ADD_RECORD, record);
+  },
+  // 增加一个私聊窗口
+  addPrivateGroup({ commit }, privateGroup) {
+    commit(types.ADD_PRIVATE_GROUP, privateGroup);
   },
 };
 
@@ -46,6 +53,9 @@ const mutations = {
   },
   [types.ADD_RECORD](state, record) {
     state.records.push(record);
+  },
+  [types.ADD_PRIVATE_GROUP](state, privateGroup) {
+    state.privateGroups.push(privateGroup);
   },
 };
 
