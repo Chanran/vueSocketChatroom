@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div>{{records}}</div>
+    <template v-for="record in records">
+      <avatar :name="record.username"></avatar>
+    </template>
   </div>
 </template>
 
