@@ -68,7 +68,7 @@ export default {
       that.addRecord({
         username: '',
         sessionId: '',
-        enter: true,
+        tip: true,
         msg,
         time,
       });
@@ -76,11 +76,22 @@ export default {
     });
     // 监听socket server 其他用户退出的消息
     socket.on('quit', (data) => {
-      console.log(data);
+      that.addRecord({
+        username: '',
+        sessionId: '',
+        tip: true,
+        msg: data.msg,
+        time: data.time,
+      });
     });
     // 监听socket server 的广播
     socket.on('broadcast', (data) => {
-      console.log(data);
+      that.addRecord({
+        username: data.user.username,
+        sessionId: data.user.sessionId,
+        msg: data.msg,
+        time: data.time,
+      });
     });
     // 监听私聊信息
     socket.on('private', (data) => {

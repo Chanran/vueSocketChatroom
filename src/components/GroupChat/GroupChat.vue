@@ -13,7 +13,7 @@
         <span class="msg">{{record.msg}}</span>
         <span class="time">{{record.time}}</span>
       </div>
-      <divider class="enter-msg" v-if="record.enter === true">{{record.msg}}</divider>
+      <divider class="tip-msg" v-if="record.tip === true">{{record.msg}}</divider>
     </template>
   </div>
 </template>
