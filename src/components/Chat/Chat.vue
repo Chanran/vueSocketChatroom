@@ -21,13 +21,13 @@
     {{ /* 聊天标签页聊天记录(私聊) */ }}
     <template v-for="(personIndex, index) in talkToPeople">
       <div class="chat-container" v-if="talkingTo === personIndex">
-        {{people[personIndex].label}}
+        <private-chat :records="people[personIndex].label"></private-chat>
       </div>
     </template>
 
     {{ /* 聊天标签页聊天记录(群聊) */ }}
     <div class="chat-container" v-if="talkingTo === -1">
-        群聊
+        <group-chat :records="records" ></group-chat>
     </div>
 
     {{ /* 选择聊天室里的人 */ }}
@@ -61,7 +61,7 @@ export default Chat;
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less">
+<style lang="less" scoped>
 
 @import './Chat.less';
 

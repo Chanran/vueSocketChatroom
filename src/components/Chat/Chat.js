@@ -17,6 +17,8 @@ import {
   mapActions,
   mapGetters } from 'vuex';
 
+import GroupChat from '../GroupChat';
+import PrivateChat from '../PrivateChat';
 import { logout } from '../../api/api';
 // const socket = null;
 
@@ -39,6 +41,8 @@ export default {
     Grid,
     GridItem,
     Group,
+    GroupChat,
+    PrivateChat,
   },
   data() {
     return {
