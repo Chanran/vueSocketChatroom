@@ -130,6 +130,7 @@ export default {
           });
           this.addRecord({
             username: that.user.username,
+            sessionId: that.user.sessionId,
             msg: this.message,
             time,
           });

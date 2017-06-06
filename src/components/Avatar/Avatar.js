@@ -7,7 +7,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.name);
-    this.shortName = this.name.substring(0, 1).toUpperCase();
+    this.shortName = this.name.trim().substring(0, 1).toUpperCase();
+    // console.log(this.shortName);
   },
 };
