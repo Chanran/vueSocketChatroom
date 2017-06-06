@@ -102,4 +102,24 @@ router.get('/records', (req, res) => {
   });
 });
 
+router.get('/user', (req, res) => {
+  let sessionId = req.session.id;
+  let username = req.session.username;
+  if (username) {
+    res.json({
+      code: '200',
+      msg: '',
+      data: {
+        sessionId,
+        username,
+      },
+    });
+  } else {
+    res.json({
+      code: '206',
+      msg: 'not log in',
+    });
+  }
+});
+
 module.exports = router;

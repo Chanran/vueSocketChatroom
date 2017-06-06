@@ -26,6 +26,9 @@ const actions = {
         commit(types.END_LOADING);
       });
   },
+  addRecord({ commit }, record) {
+    commit(types.ADD_RECORD, record);
+  },
 };
 
 const mutations = {
@@ -40,6 +43,9 @@ const mutations = {
   },
   [types.GET_RECORDS_FAILURE](state) {
     state.records = [];
+  },
+  [types.ADD_RECORD](state, record) {
+    state.records.push(record);
   },
 };
 

@@ -30,10 +30,10 @@ function messageHandler(socketio) {
   socketio.on('connection', (socket) => {
     console.log(socket.id, '已连接');
 
-    socket.on('login', () => {
+    socket.on('login', (data) => {
       let sessionId = getSessionId(socket);
       console.log(sessionId);
-      let time = moment().format('YYYY/MM/DD HH:mm:ss');
+      let time = data.time;
       if (sessionId) {
         // 设置登录的用户的socket
         users.setUserSocket(sessionId, socket);
@@ -59,7 +59,7 @@ function messageHandler(socketio) {
       let username = users.getUsername(sessionId);
       // console.log(username);
       let msg = data.msg;
-      let time = moment().format('YYYY/MM/DD HH:mm:ss');
+      let time = data.time;
       if (username) {
         socket.broadcast.emit('broadcast', {
           user: {
@@ -79,7 +79,7 @@ function messageHandler(socketio) {
     socket.on('private', (data) => {
       let sessionId = getSessionId(socket);
       let username = users.getUsername(sessionId);
-      let time = moment().format('YYYY/MM/DD HH:mm:ss');
+      let time = data.time;
       if (username) {
         let to = users.findUser(data.toSessionId);
         if (to) {

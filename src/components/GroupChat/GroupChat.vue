@@ -1,7 +1,18 @@
 <template>
   <div>
     <template v-for="record in records">
-      <avatar :name="record.username"></avatar>
+      <div class="record" v-if="record.sessionId !== user.sessionId">
+        <avatar class="avatar" :name="record.username"></avatar>
+        <span class="name">{{record.username}}</span>
+        <span class="msg">{{record.msg}}</span>
+        <span class="time">{{record.time}}</span>
+      </div>
+      <div class="record-now" v-else>
+        <avatar class="avatar" :name="record.username"></avatar>
+        <span class="name">{{record.username}}</span>
+        <span class="msg">{{record.msg}}</span>
+        <span class="time">{{record.time}}</span>
+      </div>
     </template>
   </div>
 </template>

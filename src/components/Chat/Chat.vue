@@ -27,7 +27,7 @@
 
     {{ /* 聊天标签页聊天记录(群聊) */ }}
     <div class="chat-container" v-if="talkingTo === -1">
-        <group-chat :records="records" ></group-chat>
+        <group-chat :user="user" :records="records"></group-chat>
     </div>
 
     {{ /* 选择聊天室里的人 */ }}

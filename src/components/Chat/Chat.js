@@ -16,6 +16,7 @@ import {
 import {
   mapActions,
   mapGetters } from 'vuex';
+import moment from 'moment';
 
 import GroupChat from '../GroupChat';
 import PrivateChat from '../PrivateChat';
@@ -54,7 +55,10 @@ export default {
     const socket = window.io('http://localhost:8080');
     const that = this;
     // 告诉socket server该用户登录的动作
-    socket.emit('login');
+    let time = moment().format('YYYY/MM/DD HH:mm:ss');
+    socket.emit('login', {
+      time,
+    });
     // 监听socket server其他用户登录的消息
     socket.on('someOneLogin', ({ user, msg }) => {
       that.addPeople({
@@ -78,6 +82,7 @@ export default {
     // 聊天室成员
     this.getOthers();
     this.getRecords();
+    this.getUser();
   },
   computed: {
     ...mapGetters([
@@ -85,6 +90,7 @@ export default {
       'talkingTo',
       'talkToPeople',
       'records',
+      'user',
     ]),
   },
   methods: {
@@ -93,19 +99,23 @@ export default {
       'setTalkingTo',
       'addTalkToPeople',
       'addPeople',
+      'addRecord',
       'getRecords',
+      'getUser',
     ]),
     sendMsg() {
       const socket = window.io('http://localhost:8080');
+      const that = this;
       if (this.message.trim() !== '') {
         // 非群聊
         if (this.talkingTo !== -1) {
           let sessionId = this.people[this.talkingTo].value;
-
+          let time = moment().format('YYYY/MM/DD HH:mm:ss');
           // 发送私聊消息
           socket.emit('private', {
             msg: this.message,
             toSessionId: sessionId,
+            time,
           });
           // 清除输入框
           this.message = '';
@@ -113,8 +123,15 @@ export default {
         // 群聊
         } else {
           // 发送群聊消息
+          let time = moment().format('YYYY/MM/DD HH:mm:ss');
           socket.emit('broadcast', {
             msg: this.message,
+            time,
+          });
+          this.addRecord({
+            username: that.user.username,
+            msg: this.message,
+            time,
           });
           // 清除输入框
           this.message = '';

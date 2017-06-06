@@ -5,12 +5,17 @@ const initialState = {
   people: [],
   talkingTo: -1,
   talkToPeople: [],
+  user: {
+    username: '',
+    sessionId: '',
+  },
 };
 
 const getters = {
   people: state => state.people,
   talkingTo: state => state.talkingTo,
   talkToPeople: state => state.talkToPeople,
+  user: state => state.user,
 };
 
 const actions = {
@@ -46,6 +51,22 @@ const actions = {
   // 增加某个talkToPeople
   addTalkToPeople({ commit }, index) {
     commit(types.ADD_TALK_TO_PEOPLE, index);
+  },
+  getUser({ commit }) {
+   // 开始异步请求，展示loading动画
+    commit(types.START_LOADING);
+    api.getUser(
+      (user) => {
+        commit(types.GET_USERNAME_SUCCESS, user);
+        // 关闭loading
+        commit(types.END_LOADING);
+      },
+      (err) => {
+        console.log(err);
+        commit(types.GET_USERNAME_FAILURE);
+        // 关闭loading
+        commit(types.END_LOADING);
+      });
   },
 };
 
@@ -93,7 +114,15 @@ const mutations = {
   [types.ADD_PEOPLE](state, user) {
     state.people.push(user);
   },
-
+  [types.GET_USERNAME_SUCCESS](state, user) {
+    state.user = { ...user };
+  },
+  [types.GET_OTHERS_FAILURE](state) {
+    state.user = {
+      username: '',
+      sessionId: '',
+    };
+  },
 };
 
 

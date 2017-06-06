@@ -100,8 +100,29 @@ export function getOthers(cb, errorCb) {
   });
 }
 
+/**
+ * 得到所有群聊聊天记录
+ *
+ * @export
+ * @param {function} cb
+ * @param {function} errorCb
+ */
 export function getRecords(cb, errorCb) {
   axios.get('/api/records')
+  .then(({ data }) => {
+    if (parseInt(data.code, 10) === 200) {
+      cb(data.data);
+    } else {
+      console.log(data.msg);
+    }
+  })
+  .catch((err) => {
+    errorCb(err);
+  });
+}
+
+export function getUser(cb, errorCb) {
+  axios.get('/api/user')
   .then(({ data }) => {
     if (parseInt(data.code, 10) === 200) {
       cb(data.data);
