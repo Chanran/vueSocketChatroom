@@ -2,8 +2,9 @@ import * as api from '../../api/api';
 import * as types from '../mutation-types';
 
 const initialState = {
-  records: [],
-  privateGroups: [],
+  records: [], // [{sessionId,username,msg,time}...]
+  // sessionId是发出来的人的sessionId
+  privateGroups: [], // [{sessionId,username,msgs:[{sessionId,username,msg,time}]}]
 };
 
 const getters = {
@@ -36,6 +37,11 @@ const actions = {
   addPrivateGroup({ commit }, privateGroup) {
     commit(types.ADD_PRIVATE_GROUP, privateGroup);
   },
+  // 增加一条私聊聊天记录
+  addPrivateRecord({ commit }, privateRecord) {
+    console.log(privateRecord);
+    commit(types.ADD_PRIVATE_RECORD, privateRecord);
+  },
 };
 
 const mutations = {
@@ -56,6 +62,16 @@ const mutations = {
   },
   [types.ADD_PRIVATE_GROUP](state, privateGroup) {
     state.privateGroups.push(privateGroup);
+  },
+  [types.ADD_PRIVATE_RECORD](state, privateRecord) {
+    let groupIndex = privateRecord.privateGroupIndex;
+    let privateGroupRecord = {
+      sessionId: privateRecord.sessionId,
+      username: privateRecord.username,
+      msg: privateRecord.msg,
+      time: privateRecord.time,
+    };
+    state.privateGroups[groupIndex].msgs.push(privateGroupRecord);
   },
 };
 

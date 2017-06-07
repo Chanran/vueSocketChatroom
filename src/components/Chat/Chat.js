@@ -96,6 +96,18 @@ export default {
     // 监听私聊信息
     socket.on('private', (data) => {
       console.log(data);
+      for (let i = 0; i < this.privateGroups.length; i += 1) {
+        if (this.privateGroups[i].sessionId === data.user.sessionId) {
+          this.addPrivateRecord(
+            {
+              privateGroupIndex: i,
+              sessionId: data.user.sessionId,
+              username: data.user.username,
+              msg: data.msg,
+              time: data.time,
+            });
+        }
+      }
     });
     // 聊天室成员
     this.getOthers();
@@ -109,6 +121,7 @@ export default {
       'talkToPeople',
       'records',
       'user',
+      'privateGroups',
     ]),
   },
   methods: {
@@ -120,6 +133,8 @@ export default {
       'addRecord',
       'getRecords',
       'getUser',
+      'addPrivateGroup',
+      'addPrivateRecord',
     ]),
     sendMsg() {
       const socket = window.io('http://localhost:8080');
@@ -170,6 +185,11 @@ export default {
           if (this.talkToPeople.includes(i)) {
             this.setTalkingTo(i);
           } else {
+            this.addPrivateGroup({
+              sessionId: this.people[i].value,
+              username: this.people[i].label,
+              msgs: [],
+            });
             this.addTalkToPeople(i);
             this.setTalkingTo(i);
           }

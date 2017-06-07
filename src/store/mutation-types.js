@@ -24,4 +24,6 @@ export const ADD_RECORD = 'ADD_RECORD';
 
 // 增加私聊组
 export const ADD_PRIVATE_GROUP = 'ADD_PRIVATE_GROUP';
+// 增加一条私聊聊天记录
+export const ADD_PRIVATE_RECORD = 'ADD_PRIVATE_RECORD';
 

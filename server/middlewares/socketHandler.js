@@ -80,6 +80,7 @@ function messageHandler(socketio) {
       let sessionId = getSessionId(socket);
       let username = users.getUsername(sessionId);
       let time = data.time;
+      console.log('private', data.msg);
       if (username) {
         let to = users.findUser(data.toSessionId);
         if (to) {
