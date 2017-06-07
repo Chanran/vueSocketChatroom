@@ -21,7 +21,7 @@
     {{ /* 聊天标签页聊天记录(私聊) */ }}
     <template v-for="(personIndex, index) in talkToPeople">
       <div class="chat-container" v-if="talkingTo === personIndex">
-        <private-chat :records="people[personIndex].label"></private-chat>
+        <private-chat :user="user" :records="people[personIndex].msgs"></private-chat>
       </div>
     </template>
 

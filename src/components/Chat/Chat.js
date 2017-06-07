@@ -64,6 +64,7 @@ export default {
       that.addPeople({
         label: user.username,
         value: user.sessionId,
+        msgs: [],
       });
       that.addRecord({
         username: '',
@@ -86,18 +87,20 @@ export default {
     });
     // 监听socket server 的广播
     socket.on('broadcast', (data) => {
-      that.addRecord({
-        username: data.user.username,
-        sessionId: data.user.sessionId,
-        msg: data.msg,
-        time: data.time,
-      });
+      if (data.user.sessionId !== that.user.sessionId) {
+        that.addRecord({
+          username: data.user.username,
+          sessionId: data.user.sessionId,
+          msg: data.msg,
+          time: data.time,
+        });
+      }
     });
     // 监听私聊信息
     socket.on('private', (data) => {
       console.log(data);
-      for (let i = 0; i < this.privateGroups.length; i += 1) {
-        if (this.privateGroups[i].sessionId === data.user.sessionId) {
+      for (let i = 0; i < this.people.length; i += 1) {
+        if (this.people[i].value === data.user.sessionId) {
           this.addPrivateRecord(
             {
               privateGroupIndex: i,
@@ -121,7 +124,6 @@ export default {
       'talkToPeople',
       'records',
       'user',
-      'privateGroups',
     ]),
   },
   methods: {
@@ -133,12 +135,10 @@ export default {
       'addRecord',
       'getRecords',
       'getUser',
-      'addPrivateGroup',
       'addPrivateRecord',
     ]),
     sendMsg() {
       const socket = window.io('http://localhost:8080');
-      const that = this;
       if (this.message.trim() !== '') {
         // 非群聊
         if (this.talkingTo !== -1) {
@@ -150,6 +150,14 @@ export default {
             toSessionId: sessionId,
             time,
           });
+          this.addPrivateRecord(
+            {
+              privateGroupIndex: this.talkingTo,
+              username: this.user.username,
+              sessionId: this.user.sessionId,
+              msg: this.message,
+              time,
+            });
           // 清除输入框
           this.message = '';
 
@@ -162,8 +170,8 @@ export default {
             time,
           });
           this.addRecord({
-            username: that.user.username,
-            sessionId: that.user.sessionId,
+            username: this.user.username,
+            sessionId: this.user.sessionId,
             msg: this.message,
             time,
           });
@@ -185,11 +193,6 @@ export default {
           if (this.talkToPeople.includes(i)) {
             this.setTalkingTo(i);
           } else {
-            this.addPrivateGroup({
-              sessionId: this.people[i].value,
-              username: this.people[i].label,
-              msgs: [],
-            });
             this.addTalkToPeople(i);
             this.setTalkingTo(i);
           }

@@ -2,7 +2,7 @@ import * as api from '../../api/api';
 import * as types from '../mutation-types';
 
 const initialState = {
-  people: [],
+  people: [], // [{label:username,value:sessionId,msgs:[{sessionId,username,msg,time}]}]
   talkingTo: -1,
   talkToPeople: [],
   user: {
@@ -68,6 +68,11 @@ const actions = {
         commit(types.END_LOADING);
       });
   },
+  // 增加一条私聊聊天记录
+  addPrivateRecord({ commit }, privateRecord) {
+    console.log(privateRecord);
+    commit(types.ADD_PRIVATE_RECORD, privateRecord);
+  },
 };
 
 const mutations = {
@@ -79,6 +84,7 @@ const mutations = {
         state.people.push({
           label: other.username,
           value: other.sessionId,
+          msgs: [],
         });
         return true;
       });
@@ -122,6 +128,18 @@ const mutations = {
       username: '',
       sessionId: '',
     };
+  },
+  [types.ADD_PRIVATE_RECORD](state, privateRecord) {
+    let groupIndex = privateRecord.privateGroupIndex;
+    let privateGroupRecord = {
+      sessionId: privateRecord.sessionId, // sessionId
+      username: privateRecord.username, // username
+      msg: privateRecord.msg,
+      time: privateRecord.time,
+    };
+    console.log(state.people);
+    console.log(groupIndex);
+    state.people[groupIndex].msgs.push(privateGroupRecord);
   },
 };
 
