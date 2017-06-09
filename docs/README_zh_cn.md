@@ -53,4 +53,4 @@ npm run deploy
 
 ## License
 
-[MIT](./LICENSE)
+[MIT](../LICENSE)
