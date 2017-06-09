@@ -36,6 +36,13 @@ npm run server # open another terminal
 
 visit [http://localhost:8080/](http://localhost:8080/)
 
+## deploy
+
+```
+npm install -g pm2 // install just once
+npm run deploy
+```
+
 ## tech docs
 
 - [api docs](https://www.showdoc.cc/1629169?page_id=14974136)

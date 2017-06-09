@@ -34,6 +34,13 @@ npm run server # 另开一个终端
 
 访问 [http://localhost:8080/](http://localhost:8080/)
 
+## 部署
+
+```
+npm install -g pm2 // 只安装一次
+npm run deploy
+```
+
 ## 技术文档
 
 - [api文档](https://www.showdoc.cc/1629169?page_id=14974136)
