@@ -1,21 +1,22 @@
-# socket.io 即时聊天室
+# socket.io immediate chat room
 
-## 安装依赖
+[中文文档](./docs/README_zh_cn.md)
+
+## install dependencies
 
 1. node7.x
 
-2. 刷新node服务器
+2. auto restart node server tool
 
 ```
 npm i -g nodemon
 ```
 
-3. eslint代码规范化
+3. QA tool
 
-    给你的编辑器装一个eslint插件
+    install eslint plugin for your code editor(like "eslint" in vscode)
 
-
-## 下载
+## download
 
 ``` bash
 # clone
@@ -23,27 +24,28 @@ git clone git@github.com:Chanran/vueSocketChatroom.git
 cd vueSocketChatroom
 
 # install dependencies
-npm install
+npm install -d
 ```
 
-## 启动
+## start
 
 ```
 npm run dev
-npm run server # 另开一个终端
+npm run server # open another terminal
 ```
 
-访问[http://localhost:8080/](http://localhost:8080/)
+visit[http://localhost:8080/](http://localhost:8080/)
 
-## 技术文档
+## tech docs
 
-- [api文档](https://www.showdoc.cc/1629169?page_id=14974136)
-- [vue2(前端MVVM框架)](https://cn.vuejs.org/)
-- [vue-router2(前端路由框架)](https://router.vuejs.org/zh-cn/)
-- [vue-loader(webpack的loader,vue-cli使用的)](https://lvyongbo.gitbooks.io/vue-loader/content/)
-- [vux(前端UI框架)](https://vux.li/#/)
-- [express4.x(node框架)](http://www.expressjs.com.cn/)
-- [mongodb(数据库)](http://mongodb.github.io/node-mongodb-native/2.2/installation-guide/installation-guide/)
+- [api docs](https://www.showdoc.cc/1629169?page_id=14974136)
+- [vue2](https://vuejs.org/)
+- [vue-router2](https://router.vuejs.org/en/)
+- [vuex](https://vuex.vuejs.org/en/)
+- [vue-loader](https://vue-loader.vuejs.org/en/)
+- [vux](https://vux.li/#/)
+- [express4.x](https://expressjs.com/)
+- [mongodb](https://docs.mongodb.com/)
 
 ## License
 
