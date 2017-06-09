@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "server": "nodemon server/app.js",
-    "deploy": "pm2 server/app.js",
+    "deploy": "pm2 start server/app.js",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
