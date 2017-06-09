@@ -32,7 +32,7 @@ npm run dev
 npm run server # 另开一个终端
 ```
 
-访问[http://localhost:8080/](http://localhost:8080/)
+访问 [http://localhost:8080/](http://localhost:8080/)
 
 ## 技术文档
 

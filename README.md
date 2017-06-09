@@ -34,7 +34,7 @@ npm run dev
 npm run server # open another terminal
 ```
 
-visit[http://localhost:8080/](http://localhost:8080/)
+visit [http://localhost:8080/](http://localhost:8080/)
 
 ## tech docs
 
