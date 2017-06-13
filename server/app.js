@@ -58,9 +58,11 @@ app.all('*', (req, res, next) => {
 // 路由
 app.use('/api', chat);
 // 上线路由
-// app.get('/chat', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../index.html'));
-// });
+if (process.env.NODE_ENV !== 'development') {
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../dist/index.html'));
+  });
+}
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

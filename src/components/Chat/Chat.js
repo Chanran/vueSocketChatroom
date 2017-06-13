@@ -52,7 +52,7 @@ export default {
     };
   },
   mounted() {
-    const socket = window.io('http://localhost:8080');
+    const socket = window.io('/:8080');
     const that = this;
     // 告诉socket server该用户登录的动作
     let time = moment().format('YYYY/MM/DD HH:mm:ss');
@@ -138,7 +138,7 @@ export default {
       'addPrivateRecord',
     ]),
     sendMsg() {
-      const socket = window.io('http://localhost:8080');
+      const socket = window.io('/:8080');
       if (this.message.trim() !== '') {
         // 非群聊
         if (this.talkingTo !== -1) {
