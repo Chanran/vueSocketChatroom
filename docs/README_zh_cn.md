@@ -1,5 +1,15 @@
 # socket.io 即时聊天室
 
+## 界面一瞥
+
+![login page](./login.png)
+
+![group chat page](./group_chat.png)
+
+![others](./others.png)
+
+![private chat](./private_chat.png)
+
 ## 安装依赖
 
 1. node7.x

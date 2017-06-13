@@ -2,6 +2,16 @@
 
 [中文文档](./docs/README_zh_cn.md)
 
+## glance
+
+![login page](./docs/login.png)
+
+![group chat page](./docs/group_chat.png)
+
+![others](./docs/others.png)
+
+![private chat](./docs/private_chat.png)
+
 ## install dependencies
 
 1. node7.x
