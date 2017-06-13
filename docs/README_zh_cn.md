@@ -54,7 +54,7 @@ npm run server # 另开一个终端
 ## 部署
 
 ```
-npm install -g pm2 // 只安装一次
+npm install -g pm2 # 只安装一次
 npm run deploy
 ```
 

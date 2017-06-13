@@ -57,7 +57,8 @@ visit [http://localhost:8080/](http://localhost:8080/)
 ## deploy
 
 ```
-npm install -g pm2 // install just once
+npm install -g pm2 # install just once
+npm run build
 npm run deploy
 ```
 
