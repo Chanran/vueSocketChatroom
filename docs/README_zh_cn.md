@@ -2,13 +2,20 @@
 
 ## 界面一瞥
 
-![login page](./login.png)
+- login page
 
-![group chat page](./group_chat.png)
+  ![login page](./login.png)
 
-![others](./others.png)
+- group chat page
 
-![private chat](./private_chat.png)
+  ![group chat page](./group_chat.png)
+
+- others list
+  ![others](./others.png)
+
+- private chat page
+
+  ![private chat](./private_chat.png)
 
 ## 安装依赖
 
