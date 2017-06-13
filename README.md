@@ -4,13 +4,21 @@
 
 ## glance
 
-![login page](./docs/login.png)
+- login page
 
-![group chat page](./docs/group_chat.png)
+  ![login page](./docs/login.png)
 
-![others](./docs/others.png)
+- group chat page
 
-![private chat](./docs/private_chat.png)
+  ![group chat page](./docs/group_chat.png)
+
+- others list
+
+  ![others](./docs/others.png)
+
+- private chat page
+
+  ![private chat](./docs/private_chat.png)
 
 ## install dependencies
 
