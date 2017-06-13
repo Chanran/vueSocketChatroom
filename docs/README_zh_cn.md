@@ -1,5 +1,9 @@
 # socket.io 即时聊天室
 
+[English docs](../README.md)
+
+[在线预览](http://182.254.231.203:3000/)
+
 ## 界面一瞥
 
 - login page
