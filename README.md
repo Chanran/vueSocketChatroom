@@ -60,7 +60,7 @@ visit [http://localhost:8080/](http://localhost:8080/)
 
 ```
 npm install -g pm2 # install just once
-npm i -d
+npm i -d --production
 npm run build
 npm run deploy
 ```

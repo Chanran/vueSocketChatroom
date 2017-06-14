@@ -59,7 +59,7 @@ npm run server # 另开一个终端
 
 ```
 npm install -g pm2 # 只安装一次
-npm i -d
+npm i -d --production
 npm run build
 npm run deploy
 ```
