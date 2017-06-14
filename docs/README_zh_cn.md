@@ -6,18 +6,18 @@
 
 ## 界面一瞥
 
-- login page
+- 登录页
 
   ![login page](./login.png)
 
-- group chat page
+- 群聊页
 
   ![group chat page](./group_chat.png)
 
-- others list
+- 其他人列表
   ![others](./others.png)
 
-- private chat page
+- 私聊页
 
   ![private chat](./private_chat.png)
 
@@ -59,6 +59,8 @@ npm run server # 另开一个终端
 
 ```
 npm install -g pm2 # 只安装一次
+npm i -d
+npm run build
 npm run deploy
 ```
 
