@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const fs = require('fs');
-// const proxy = require('proxy-middleware');
+const favicon = require('serve-favicon');
 
 const dbUrl = require('./config/db').url;
 
@@ -39,7 +39,7 @@ app.use(session({
 app.use(cookieParser(secret));
 
 // uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
