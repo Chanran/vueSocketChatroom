@@ -40,14 +40,14 @@
     </div>
 
     {{ /* 聊天记录底部 */ }}
-    <divider>我是有底线的</divider>
+    <divider style="    margin-left: 300px;">我是有底线的</divider>
 
     {{ /* 替代置底输入框的block */ }}
     <div class="replace-block"></div>
     {{ /* 置底输入框 */ }}
     <div class="bottom-input">
-      <input class="input" v-model="message" placeholder="输入..." />
-      <x-button class="button" type="primary" @click.native="sendMsg">发送</x-button>
+      <input class="input" @keyup.enter="sendMsg" v-model="message" placeholder="输入..." />
+      <x-button class="button"  @click.native="sendMsg">发送</x-button>
     </div>
   </div>
 </template>

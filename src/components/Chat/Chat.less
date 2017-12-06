@@ -1,17 +1,45 @@
 .container {
   height: 100%;
+
+
+
+  .vux-header{
+    position: fixed;
+    z-index: 100;
+    left: 300px;
+    right: 0;
+  }
+  .vux-tab{
+    display: block;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top:0px;
+    bottom: 0;
+    width: 300px;
+    height:100%;
+    background: #2e3641;
+    .vux-tab-item{
+      height: 40px;
+      color:#fff;
+    }
+  }
   .grid-item {
     padding: 0 !important;
   }
   .chat-container {
-    padding: 10px 5px 5px 5px;
+    padding: 60px 5px 60px 5px;
     min-height: 300px;
+    background: #eee;
+    margin-left: 300px;
   }
   .bottom-input {
     position: fixed;
+    left:300px;
+    right:0;
     bottom: 0;
     z-index: 2;
-    width: 100%;
+    background: #fff;
     .input {
       margin-left: 5px;
       padding-left: 5px;
