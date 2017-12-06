@@ -22,4 +22,11 @@ body {
     padding: 0px;
 }
 
+.clearfix{overflow:hidden;_zoom:1;}
+.clearfix {
+  zoom: 1;
+  display: table;
+  width: 100%;
+}
+
 </style>
