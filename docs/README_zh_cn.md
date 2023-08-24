@@ -2,8 +2,6 @@
 
 [English docs](../README.md)
 
-[在线预览](http://182.254.231.203:3000/)(用户名:blue,密码:huimin)
-
 ## 界面一瞥
 
 - 登录页
